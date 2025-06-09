@@ -18,7 +18,6 @@ format:
       light: cosmo
     code-copy: true
     code-line-numbers: true
-    toc: true
     toc:
       collapse: true
       scroll_highlight: true
