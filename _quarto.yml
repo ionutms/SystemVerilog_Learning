@@ -19,7 +19,15 @@ format:
     code-copy: true
     code-line-numbers: true
     toc: true
-    toc-depth: 3        # How many heading levels to include
-    toc-location: left  # left, right, body
+    toc-depth: 4        # Increased to capture more heading levels
+    toc-location: left
     toc-title: "Contents"
+    toc-expand: 2       # Auto-expand first 2 levels
     search: true
+    smooth-scroll: true
+    css: 
+      - styles.css      # Custom CSS for better TOC styling
+    grid:
+      sidebar-width: 300px  # Wider sidebar for better TOC readability
+      body-width: 900px
+      margin-width: 200px

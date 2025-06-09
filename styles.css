@@ -1,0 +1,135 @@
+/* Improved Table of Contents Styling */
+
+/* TOC Container */
+.sidebar nav[role="doc-toc"] {
+    padding: 1rem;
+    max-height: calc(100vh - 2rem);
+    overflow-y: auto;
+}
+
+/* TOC Title */
+.sidebar nav[role="doc-toc"] > .toc-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--bs-border-color);
+}
+
+/* TOC List Styling */
+.sidebar nav[role="doc-toc"] ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.sidebar nav[role="doc-toc"] ul ul {
+    padding-left: 1.2rem;
+    margin-top: 0.3rem;
+    border-left: 2px solid var(--bs-border-color-translucent);
+}
+
+/* TOC Links */
+.sidebar nav[role="doc-toc"] a {
+    display: block;
+    padding: 0.4rem 0.8rem;
+    text-decoration: none;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--bs-body-color);
+}
+
+.sidebar nav[role="doc-toc"] a:hover {
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-emphasis-color);
+    text-decoration: none;
+}
+
+/* Active TOC Link */
+.sidebar nav[role="doc-toc"] a.active {
+    background-color: var(--bs-primary);
+    color: white;
+    font-weight: 500;
+}
+
+/* Different levels styling */
+.sidebar nav[role="doc-toc"] > ul > li > a {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.sidebar nav[role="doc-toc"] > ul > li > ul > li > a {
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding-left: 1rem;
+}
+
+.sidebar nav[role="doc-toc"] > ul > li > ul > li > ul > li > a {
+    font-weight: 400;
+    font-size: 0.85rem;
+    padding-left: 1.5rem;
+    color: var(--bs-secondary-color);
+}
+
+/* Collapsible sections */
+.sidebar nav[role="doc-toc"] li > ul {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sidebar nav[role="doc-toc"] li.expanded > ul {
+    max-height: 500px;
+}
+
+/* Add expand/collapse indicators */
+.sidebar nav[role="doc-toc"] li:has(ul) > a::before {
+    content: "▶";
+    display: inline-block;
+    width: 1rem;
+    font-size: 0.7rem;
+    transition: transform 0.2s ease;
+    margin-right: 0.3rem;
+}
+
+.sidebar nav[role="doc-toc"] li.expanded > a::before {
+    transform: rotate(90deg);
+}
+
+/* Improved scrollbar for TOC */
+.sidebar nav[role="doc-toc"]::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar nav[role="doc-toc"]::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar nav[role="doc-toc"]::-webkit-scrollbar-thumb {
+    background: var(--bs-border-color);
+    border-radius: 3px;
+}
+
+.sidebar nav[role="doc-toc"]::-webkit-scrollbar-thumb:hover {
+    background: var(--bs-secondary-color);
+}
+
+/* Better spacing for readability */
+.sidebar nav[role="doc-toc"] li {
+    margin-bottom: 0.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar nav[role="doc-toc"] {
+        padding: 0.5rem;
+    }
+    
+    .sidebar nav[role="doc-toc"] a {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.85rem;
+    }
+}
