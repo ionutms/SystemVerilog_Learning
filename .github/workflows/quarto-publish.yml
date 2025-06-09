@@ -1,0 +1,139 @@
+name: Render and Deploy Quarto Website
+
+# When to run this workflow
+on:
+  # Trigger on push to main/master branch
+  push:
+    branches: [main, master]
+  # Trigger on pull requests (for testing)
+  pull_request:
+    branches: [main, master]
+  # Allow manual triggering
+  workflow_dispatch:
+
+# Set permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch full history for better caching
+
+      # Step 2: Setup Quarto
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          # Optionally specify Quarto version
+          version: "1.4.550"
+
+      # Step 3: Setup Python (for Jupyter notebooks)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'  # Cache pip dependencies
+
+      # Step 4: Install Python dependencies
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter nbformat nbconvert
+          # Add any other dependencies your notebook needs
+          pip install matplotlib numpy pandas seaborn plotly
+          # If you have a requirements.txt file:
+          # pip install -r requirements.txt
+
+      # Step 5: Setup R (if you have R content)
+      # Uncomment if you need R support
+      # - name: Set up R
+      #   uses: r-lib/actions/setup-r@v2
+      #   with:
+      #     r-version: '4.3.1'
+
+      # - name: Install R dependencies
+      #   run: |
+      #     install.packages(c("rmarkdown", "knitr"))
+      #   shell: Rscript {0}
+
+      # Step 6: Render Quarto project
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          # Optional: specify path if not in root
+          # path: "."
+          to: html  # Specify output format
+
+      # Step 7: Upload artifact for GitHub Pages
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  # Deploy job (only runs on main/master branch)
+  deploy:
+    # Only deploy on main/master, not on PRs
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    
+    # Depend on build job
+    needs: build
+    
+    # Deploy to GitHub Pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Optional: Test job for pull requests
+  test:
+    # Only run on pull requests
+    if: github.event_name == 'pull_request'
+    
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter nbformat nbconvert matplotlib numpy pandas
+
+      - name: Test Quarto render
+        run: |
+          quarto render --to html
+          echo "✅ Quarto render successful"
+
+      - name: Check for broken links (optional)
+        run: |
+          # You can add link checking here
+          echo "Link checking would go here"
