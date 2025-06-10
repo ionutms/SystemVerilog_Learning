@@ -37,6 +37,9 @@ jobs:
       # Step 2: Setup Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
+        # with:
+        #   # Optionally specify Quarto version
+        #   version: "1.4.550"
 
       # Step 3: Setup Python (for Jupyter notebooks)
       - name: Set up Python
@@ -55,42 +58,31 @@ jobs:
           # If you have a requirements.txt file:
           # pip install -r requirements.txt
 
-      # Step 5: Render Quarto project and find output directory
-      - name: Render Quarto Project
-        run: |
-          echo "Rendering Quarto project..."
-          quarto render
-          echo "Listing all directories after render:"
-          ls -la
-          echo "Finding HTML files:"
-          find . -name "*.html" -type f | head -10
-          
-          # Determine output directory
-          if [ -d "_site" ]; then
-            echo "OUTPUT_DIR=_site" >> $GITHUB_ENV
-          elif [ -d "docs" ]; then
-            echo "OUTPUT_DIR=docs" >> $GITHUB_ENV
-          elif [ -d "_book" ]; then
-            echo "OUTPUT_DIR=_book" >> $GITHUB_ENV
-          else
-            # If no standard directory, create _site and move HTML files there
-            echo "No standard output directory found, creating _site"
-            mkdir -p _site
-            # Copy all HTML files and assets to _site
-            find . -maxdepth 1 -name "*.html" -exec cp {} _site/ \;
-            # Copy common asset directories if they exist
-            [ -d "site_libs" ] && cp -r site_libs _site/ || true
-            [ -d "images" ] && cp -r images _site/ || true
-            [ -d "files" ] && cp -r files _site/ || true
-            echo "OUTPUT_DIR=_site" >> $GITHUB_ENV
-          fi
-          echo "Using output directory: $OUTPUT_DIR"
+      # Step 5: Setup R (if you have R content)
+      # Uncomment if you need R support
+      # - name: Set up R
+      #   uses: r-lib/actions/setup-r@v2
+      #   with:
+      #     r-version: '4.3.1'
 
-      # Step 6: Upload artifact for GitHub Pages
+      # - name: Install R dependencies
+      #   run: |
+      #     install.packages(c("rmarkdown", "knitr"))
+      #   shell: Rscript {0}
+
+      # Step 6: Render Quarto project
+      - name: Render Quarto Project
+        uses: quarto-dev/quarto-actions/render@v2
+        with:
+          # Optional: specify path if not in root
+          # path: "."
+          to: html  # Specify output format
+
+      # Step 7: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ env.OUTPUT_DIR }}
+          path: _site
 
   # Deploy job (only runs on main/master branch)
   deploy:
@@ -138,7 +130,7 @@ jobs:
 
       - name: Test Quarto render
         run: |
-          quarto render
+          quarto render --to html
           echo "✅ Quarto render successful"
 
       - name: Check for broken links (optional)
