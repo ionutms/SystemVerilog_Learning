@@ -19,7 +19,7 @@ format:
     code-copy: true
     code-line-numbers: true
     toc: true
-    toc-depth: 1        # How many heading levels to include
+    toc-depth: 2        # How many heading levels to include
     toc-location: left  # left, right, body
     toc-title: "Contents"
     search: true
