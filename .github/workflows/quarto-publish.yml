@@ -74,15 +74,25 @@ jobs:
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          # Optional: specify path if not in root
-          # path: "."
           to: html  # Specify output format
 
-      # Step 7: Upload artifact for GitHub Pages
+      # Step 7: Debug - List output directories
+      - name: List output directories
+        run: |
+          echo "Contents of current directory:"
+          ls -la
+          echo "Looking for common output directories:"
+          ls -la _site/ 2>/dev/null || echo "_site not found"
+          ls -la docs/ 2>/dev/null || echo "docs not found" 
+          ls -la _book/ 2>/dev/null || echo "_book not found"
+          find . -name "*.html" -type f | head -10
+
+      # Step 8: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          # Try _site first, fallback to docs if _site doesn't exist
+          path: ${{ hashFiles('_site/**') != '' && '_site' || 'docs' }}
 
   # Deploy job (only runs on main/master branch)
   deploy:
