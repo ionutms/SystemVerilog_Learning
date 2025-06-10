@@ -37,9 +37,6 @@ jobs:
       # Step 2: Setup Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          # Optionally specify Quarto version
-          version: "1.4.550"
 
       # Step 3: Setup Python (for Jupyter notebooks)
       - name: Set up Python
@@ -74,11 +71,13 @@ jobs:
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          # Optional: specify path if not in root
-          # path: "."
           to: html  # Specify output format
 
-      # Step 7: Upload artifact for GitHub Pages
+      # Step 7: Setup GitHub Pages (configure before upload)
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      # Step 8: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -132,6 +131,12 @@ jobs:
         run: |
           quarto render --to html
           echo "✅ Quarto render successful"
+
+      - name: Check output directory
+        run: |
+          echo "Checking what was rendered:"
+          ls -la
+          [ -d "_site" ] && ls -la _site/ || echo "No _site directory found"
 
       - name: Check for broken links (optional)
         run: |

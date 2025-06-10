@@ -1,3 +1,7 @@
+project:
+  type: website
+  output-dir: _site
+
 format:
   html:
     page-layout: full
