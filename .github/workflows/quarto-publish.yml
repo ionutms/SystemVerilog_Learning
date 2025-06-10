@@ -37,9 +37,9 @@ jobs:
       # Step 2: Setup Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          # Optionally specify Quarto version
-          version: "1.4.550"
+        # with:
+        #   # Optionally specify Quarto version
+        #   version: "1.4.550"
 
       # Step 3: Setup Python (for Jupyter notebooks)
       - name: Set up Python
@@ -54,7 +54,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install jupyter nbformat nbconvert
           # Add any other dependencies your notebook needs
-          pip install matplotlib numpy pandas seaborn plotly
+          # pip install matplotlib numpy pandas seaborn plotly
           # If you have a requirements.txt file:
           # pip install -r requirements.txt
 

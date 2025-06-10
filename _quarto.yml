@@ -1,25 +1,16 @@
-project:
-  type: website
-
-website:
-  # title: "SystemVerilog Learning Resources"
-  navbar:
-    left:
-      - href: systemverilog_learning_resources.ipynb
-        text: "Learning Guide"
-    right:
-      - icon: github
-        href: https://github.com/ionutms/SystemVerilog_Learning
-
 format:
   html:
+    page-layout: full
+    grid: 
+      body-width: 1200px
     theme:
       dark: darkly
       light: cosmo
     code-copy: true
     code-line-numbers: true
     toc: true
-    toc-depth: 2        # How many heading levels to include
-    toc-location: left  # left, right, body
+    toc-depth: 6
+    toc-location: right
     toc-title: "Contents"
     search: true
+    fontsize: 18pt
