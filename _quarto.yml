@@ -23,6 +23,8 @@ website:
   sidebar:
     contents:
       - test.ipynb
+      - text: "---"  # Separator line
+      - text: "Part 1: Fundamentals"
       - systemverilog_learning_resources.ipynb
       # - section: "SystemVerilog Learning"
       #   contents:
