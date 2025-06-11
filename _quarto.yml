@@ -3,6 +3,11 @@ project:
   output-dir: _site
 
 format:
+  pdf:
+    documentclass: article
+    geometry:
+      - top=30mm
+      - left=20mm
   html:
     page-layout: full
     grid: 
