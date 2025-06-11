@@ -14,7 +14,7 @@ format:
     code-line-numbers: true
     toc: true
     toc-depth: 6
-    toc-location: navigation
+    toc-location: right
     toc-title: "Contents"
     search: true
     fontsize: 14pt
