@@ -18,3 +18,12 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 18pt
+
+website:
+  sidebar:
+    contents:
+      - test.ipynb
+      - systemverilog_learning_resources.ipynb
+      # - section: "SystemVerilog Learning"
+      #   contents:
+      #     - notebooks/01-syntax-basics.ipynb
