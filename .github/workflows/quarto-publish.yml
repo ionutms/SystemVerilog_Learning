@@ -38,14 +38,19 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # Step 3: Setup Python (for Jupyter notebooks)
+      # Step 3: Install TinyTeX for PDF generation
+      - name: Install TinyTeX
+        run: |
+          quarto install tinytex
+
+      # Step 4: Setup Python (for Jupyter notebooks)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
           cache: 'pip'  # Cache pip dependencies
 
-      # Step 4: Install Python dependencies
+      # Step 5: Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -55,7 +60,7 @@ jobs:
           # If you have a requirements.txt file:
           # pip install -r requirements.txt
 
-      # Step 5: Setup R (if you have R content)
+      # Step 6: Setup R (if you have R content)
       # Uncomment if you need R support
       # - name: Set up R
       #   uses: r-lib/actions/setup-r@v2
@@ -67,17 +72,16 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 6: Render Quarto project
+      # Step 7: Render Quarto project (both HTML and PDF)
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: html  # Specify output format
+        # Remove the 'with: to: html' to render all formats
 
-      # Step 7: Setup GitHub Pages (configure before upload)
+      # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Step 8: Upload artifact for GitHub Pages
+      # Step 9: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -117,6 +121,10 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
+      - name: Install TinyTeX
+        run: |
+          quarto install tinytex
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -129,7 +137,7 @@ jobs:
 
       - name: Test Quarto render
         run: |
-          quarto render --to html
+          quarto render
           echo "✅ Quarto render successful"
 
       - name: Check output directory
@@ -137,6 +145,8 @@ jobs:
           echo "Checking what was rendered:"
           ls -la
           [ -d "_site" ] && ls -la _site/ || echo "No _site directory found"
+          echo "Looking for PDF files:"
+          find _site -name "*.pdf" -type f || echo "No PDF files found"
 
       - name: Check for broken links (optional)
         run: |
