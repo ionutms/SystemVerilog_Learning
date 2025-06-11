@@ -17,15 +17,12 @@ format:
     toc-location: right
     toc-title: "Contents"
     search: true
-    fontsize: 18pt
+    fontsize: 14pt
 
 website:
   sidebar:
     contents:
-      - test.ipynb
-      - text: "---"  # Separator line
-      - text: "Part 1: Fundamentals"
+      - Intro.ipynb
+      - text: "---"
+      - text: "Part I: Fundamentals"
       - systemverilog_learning_resources.ipynb
-      # - section: "SystemVerilog Learning"
-      #   contents:
-      #     - notebooks/01-syntax-basics.ipynb
