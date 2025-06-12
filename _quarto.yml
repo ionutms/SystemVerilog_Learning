@@ -47,6 +47,9 @@ website:
       - Chapter_9.ipynb
       - Chapter_10.ipynb
       - Chapter_11.ipynb
+      - Chapter_12.ipynb
+      - Chapter_13.ipynb
+      - Chapter_14.ipynb
       - text: "---"
       - text: "Part IV: Verification Features"
       - text: "---"
