@@ -38,5 +38,7 @@ website:
       - Chapter_4.ipynb
       - text: "---"
       - text: "Part II: Design Constructs"
+      - Chapter_5.ipynb
+      - Chapter_6.ipynb
       - text: "---"
       - systemverilog_learning_resources.ipynb
