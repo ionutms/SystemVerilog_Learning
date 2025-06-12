@@ -40,5 +40,9 @@ website:
       - text: "Part II: Design Constructs"
       - Chapter_5.ipynb
       - Chapter_6.ipynb
+      - Chapter_7.ipynb
+      - Chapter_8.ipynb
+      - text: "---"
+      - text: "Part III: Object-Oriented Programming"
       - text: "---"
       - systemverilog_learning_resources.ipynb
