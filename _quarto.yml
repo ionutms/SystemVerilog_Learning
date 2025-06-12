@@ -44,5 +44,7 @@ website:
       - Chapter_8.ipynb
       - text: "---"
       - text: "Part III: Object-Oriented Programming"
+      - Chapter_9.ipynb
+      - Chapter_10.ipynb
       - text: "---"
       - systemverilog_learning_resources.ipynb
