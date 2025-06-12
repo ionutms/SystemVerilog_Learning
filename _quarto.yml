@@ -34,5 +34,6 @@ website:
       - text: "Part I: Fundamentals"
       - Chapter_1.ipynb
       - Chapter_2.ipynb
+      - Chapter_3.ipynb
       - text: "---"
       - systemverilog_learning_resources.ipynb
