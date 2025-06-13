@@ -17,22 +17,60 @@ format:
     fig-width: 7
     fig-height: 5
     fig-pos: 'H'
-    # Add LaTeX packages for better page control
+    
+    # Add LaTeX packages for better page control (without titlesec conflicts)
     include-in-header:
       - text: |
-          \usepackage{titlesec}
+          \usepackage{afterpage}
+          \usepackage{float}
+          \usepackage{fvextra}
+          \usepackage{longtable}
+          \usepackage{booktabs}
           \usepackage{needspace}
-          
-          % Prevent headers from being orphaned at page bottom
-          \titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
-          \titlespacing*{\subsection}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
-          
-          % Ensure minimum space after headers
-          \newcommand{\sectionbreak}{\needspace{5\baselineskip}}
           
           % Prevent widows and orphans
           \widowpenalty=10000
           \clubpenalty=10000
+          \raggedbottom
+          
+          % Add space before sections to prevent orphaned headers
+          \makeatletter
+          \renewcommand\section{%
+            \needspace{4\baselineskip}%
+            \@startsection{section}{1}{\z@}%
+            {-3.5ex \@plus -1ex \@minus -.2ex}%
+            {2.3ex \@plus.2ex}%
+            {\normalfont\Large\bfseries}%
+          }
+          \renewcommand\subsection{%
+            \needspace{3\baselineskip}%
+            \@startsection{subsection}{2}{\z@}%
+            {-3.25ex\@plus -1ex \@minus -.2ex}%
+            {1.5ex \@plus .2ex}%
+            {\normalfont\large\bfseries}%
+          }
+          \renewcommand\subsubsection{%
+            \needspace{2\baselineskip}%
+            \@startsection{subsubsection}{3}{\z@}%
+            {-3.25ex\@plus -1ex \@minus -.2ex}%
+            {1.5ex \@plus .2ex}%
+            {\normalfont\normalsize\bfseries}%
+          }
+          \makeatother
+          
+          % Enhanced verbatim environment for code
+          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+            breaksymbolleft={}, 
+            showspaces = false,
+            showtabs = false,
+            breaklines,
+            commandchars=\\\{\}
+          }
+          
+          % Better spacing around code blocks
+          \BeforeBeginEnvironment{Highlighting}{\par\noindent\needspace{2\baselineskip}}
+          \AfterEndEnvironment{Highlighting}{\par\addvspace{0.5\baselineskip}}
+    
     # Control page breaks for different elements
     tbl-cap-location: top
     fig-cap-location: bottom
