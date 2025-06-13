@@ -1,0 +1,30 @@
+services:
+  verilator:
+    image: verilator/verilator:latest
+    volumes:
+      - .:/work
+      - verilator_cache:/tmp/verilator_cache
+    working_dir: /work
+    entrypoint: /bin/bash
+    command: -c "verilator --binary --trace four_state_simple.sv four_state_simple_testbench.sv --top four_state_simple_testbench && ./obj_dir/Vfour_state_simple_testbench"
+    stdin_open: true
+    tty: true
+    environment:
+      - VERILATOR_ROOT=/usr/local/share/verilator
+
+  gtkwave:
+    image: ionutms/gtkwave-gui:latest
+    environment:
+      - DISPLAY=host.docker.internal:0.0
+    volumes:
+      - .:/home/gtkuser/workspace
+    working_dir: /home/gtkuser/workspace
+    entrypoint: gtkwave
+    command: four_state_simple.vcd
+    stdin_open: true
+    tty: true
+    depends_on:
+      - verilator
+
+volumes:
+  verilator_cache:
