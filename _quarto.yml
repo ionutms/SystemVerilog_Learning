@@ -10,6 +10,32 @@ format:
       - bottom=20mm
       - left=15mm
       - right=15mm
+    # Enhanced PDF settings for better page control
+    keep-tex: true
+    code-line-numbers: true
+    code-overflow: wrap
+    fig-width: 7
+    fig-height: 5
+    fig-pos: 'H'
+    # Add LaTeX packages for better page control
+    include-in-header:
+      - text: |
+          \usepackage{afterpage}
+          \usepackage{float}
+          \usepackage{fvextra}
+          \usepackage{longtable}
+          \usepackage{booktabs}
+          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+            breaksymbolleft={}, 
+            showspaces = false,
+            showtabs = false,
+            breaklines,
+            commandchars=\\\{\}
+          }
+    # Control page breaks for different elements
+    tbl-cap-location: top
+    fig-cap-location: bottom
+    
   html:
     page-layout: full
     grid: 
@@ -19,6 +45,7 @@ format:
       light: cosmo
     code-copy: true
     code-line-numbers: true
+    code-overflow: wrap
     toc: true
     toc-depth: 6
     toc-location: right
