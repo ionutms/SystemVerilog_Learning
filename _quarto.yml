@@ -55,5 +55,22 @@ website:
       - notebooks/Chapter_15.ipynb
       - text: "---"
       - text: "Part V: Advanced Verification"
+      - notebooks/Chapter_16.ipynb
+      - notebooks/Chapter_17.ipynb
+      - notebooks/Chapter_18.ipynb
+      - notebooks/Chapter_19.ipynb
+      - text: "---"
+      - text: "Part VI: Practical Applications"
+      - notebooks/Chapter_20.ipynb
+      - notebooks/Chapter_21.ipynb
+      - notebooks/Chapter_22.ipynb
+      - notebooks/Chapter_23.ipynb
+      - text: "---"
+      - text: "Part VII: Advanced Topics"
+      - notebooks/Chapter_24.ipynb
+      - notebooks/Chapter_25.ipynb
+      - notebooks/Chapter_26.ipynb
+      - text: "---"
+      - text: "Appendices"
       - text: "---"
       - notebooks/systemverilog_learning_resources.ipynb
