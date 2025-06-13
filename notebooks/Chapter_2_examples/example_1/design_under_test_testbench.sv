@@ -1,4 +1,4 @@
-// Testbench
+// design_under_test_testbench.sv
 module test_bench_module;  // Testbench module
   design_module_name DESIGN_INSTANCE_NAME();  // Instantiate design under test
 
