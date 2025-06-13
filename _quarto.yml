@@ -20,18 +20,19 @@ format:
     # Add LaTeX packages for better page control
     include-in-header:
       - text: |
-          \usepackage{afterpage}
-          \usepackage{float}
-          \usepackage{fvextra}
-          \usepackage{longtable}
-          \usepackage{booktabs}
-          \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
-            breaksymbolleft={}, 
-            showspaces = false,
-            showtabs = false,
-            breaklines,
-            commandchars=\\\{\}
-          }
+          \usepackage{titlesec}
+          \usepackage{needspace}
+          
+          % Prevent headers from being orphaned at page bottom
+          \titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+          \titlespacing*{\subsection}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+          
+          % Ensure minimum space after headers
+          \newcommand{\sectionbreak}{\needspace{5\baselineskip}}
+          
+          % Prevent widows and orphans
+          \widowpenalty=10000
+          \clubpenalty=10000
     # Control page breaks for different elements
     tbl-cap-location: top
     fig-cap-location: bottom
