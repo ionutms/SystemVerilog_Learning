@@ -2,12 +2,9 @@ name: Render and Deploy Quarto Website
 
 # When to run this workflow
 on:
-  # Trigger on push to main/master branch
+  # Trigger on push to publish branch
   push:
-    branches: [main, master]
-  # Trigger on pull requests (for testing)
-  pull_request:
-    branches: [main, master]
+    branches: [publish]
   # Allow manual triggering
   workflow_dispatch:
 
