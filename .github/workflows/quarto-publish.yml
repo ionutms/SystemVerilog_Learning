@@ -84,10 +84,10 @@ jobs:
         with:
           path: _site
 
-  # Deploy job (only runs on main/master branch)
+  # Deploy job
   deploy:
-    # Only deploy on main/master, not on PRs
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    # Only deploy on publish
+    if: github.ref == 'refs/heads/publish'
     
     # Depend on build job
     needs: build
@@ -103,49 +103,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  # Optional: Test job for pull requests
-  test:
-    # Only run on pull requests
-    if: github.event_name == 'pull_request'
-    
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-
-      - name: Install TinyTeX
-        run: |
-          quarto install tinytex
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install jupyter nbformat nbconvert
-
-      - name: Test Quarto render
-        run: |
-          quarto render
-          echo "✅ Quarto render successful"
-
-      - name: Check output directory
-        run: |
-          echo "Checking what was rendered:"
-          ls -la
-          [ -d "_site" ] && ls -la _site/ || echo "No _site directory found"
-          echo "Looking for PDF files:"
-          find _site -name "*.pdf" -type f || echo "No PDF files found"
-
-      - name: Check for broken links (optional)
-        run: |
-          # You can add link checking here
-          echo "Link checking would go here"
