@@ -29,28 +29,28 @@ format:
 website:
   sidebar:
     contents:
-      - Intro.ipynb
+      - notebooks/Intro.ipynb
       - text: "---"
       - text: "Part I: Fundamentals"
-      - Chapter_1.ipynb
-      - Chapter_2.ipynb
-      - Chapter_3.ipynb
-      - Chapter_4.ipynb
+      - notebooks/Chapter_1.ipynb
+      - notebooks/Chapter_2.ipynb
+      - notebooks/Chapter_3.ipynb
+      - notebooks/Chapter_4.ipynb
       - text: "---"
       - text: "Part II: Design Constructs"
-      - Chapter_5.ipynb
-      - Chapter_6.ipynb
-      - Chapter_7.ipynb
-      - Chapter_8.ipynb
+      - notebooks/Chapter_5.ipynb
+      - notebooks/Chapter_6.ipynb
+      - notebooks/Chapter_7.ipynb
+      - notebooks/Chapter_8.ipynb
       - text: "---"
       - text: "Part III: Object-Oriented Programming"
-      - Chapter_9.ipynb
-      - Chapter_10.ipynb
-      - Chapter_11.ipynb
-      - Chapter_12.ipynb
-      - Chapter_13.ipynb
-      - Chapter_14.ipynb
+      - notebooks/Chapter_9.ipynb
+      - notebooks/Chapter_10.ipynb
+      - notebooks/Chapter_11.ipynb
+      - notebooks/Chapter_12.ipynb
+      - notebooks/Chapter_13.ipynb
+      - notebooks/Chapter_14.ipynb
       - text: "---"
       - text: "Part IV: Verification Features"
       - text: "---"
-      - systemverilog_learning_resources.ipynb
+      - notebooks/systemverilog_learning_resources.ipynb
