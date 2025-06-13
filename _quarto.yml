@@ -47,10 +47,13 @@ website:
       - notebooks/Chapter_9.ipynb
       - notebooks/Chapter_10.ipynb
       - notebooks/Chapter_11.ipynb
+      - text: "---"
+      - text: "Part IV: Verification Features"
       - notebooks/Chapter_12.ipynb
       - notebooks/Chapter_13.ipynb
       - notebooks/Chapter_14.ipynb
+      - notebooks/Chapter_15.ipynb
       - text: "---"
-      - text: "Part IV: Verification Features"
+      - text: "Part V: Advanced Verification"
       - text: "---"
       - notebooks/systemverilog_learning_resources.ipynb
