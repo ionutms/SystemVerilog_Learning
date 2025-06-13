@@ -2,9 +2,9 @@ name: Render and Deploy Quarto Website
 
 # When to run this workflow
 on:
-  # Trigger on push to main branch
+  # Trigger on push to publish branch
   push:
-    branches: [main]
+    branches: [publish]
   # Allow manual triggering
   workflow_dispatch:
 
@@ -84,10 +84,10 @@ jobs:
         with:
           path: _site
 
-  # Deploy job (only runs on main branch)
+  # Deploy job (only runs on publish branch)
   deploy:
-    # Only deploy on main, not on PRs
-    if: github.ref == 'refs/heads/main'
+    # Only deploy on publish, not on PRs
+    if: github.ref == 'refs/heads/publish'
     
     # Depend on build job
     needs: build
