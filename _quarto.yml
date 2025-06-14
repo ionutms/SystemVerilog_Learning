@@ -5,6 +5,7 @@ project:
 format:
   pdf:
     documentclass: article
+    fontsize: 12pt
     geometry:
       - top=20mm
       - bottom=20mm
