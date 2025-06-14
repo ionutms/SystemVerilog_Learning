@@ -6,9 +6,9 @@ format:
   pdf:
     documentclass: article
     fontsize: 12pt
-    mainfont: "Roboto"
-    sansfont: "Roboto"
-    monofont: "Roboto Mono"
+    mainfont: "DejaVu Sans"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
     geometry:
       - top=20mm
       - bottom=20mm
