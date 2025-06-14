@@ -5,7 +5,7 @@ project:
 format:
   pdf:
     documentclass: article
-    fontsize: 12pt
+    fontsize: 10pt
     mainfont: "DejaVu Sans"
     sansfont: "DejaVu Sans"
     monofont: "DejaVu Sans Mono"
@@ -14,6 +14,10 @@ format:
       - bottom=20mm
       - left=15mm
       - right=15mm
+    # PDF-specific code formatting
+    highlight-style: github
+    code-block-bg: "#f8f8f8"
+    code-block-border-left: "#e1e4e8"
   html:
     page-layout: full
     grid: 
@@ -23,6 +27,13 @@ format:
       light: cosmo
     code-copy: true
     code-line-numbers: true
+    code-overflow: wrap
+    code-fold: false
+    code-tools: true
+    # Syntax highlighting
+    highlight-style: github
+    # Code block styling
+    css: custom.css
     toc: true
     toc-depth: 6
     toc-location: right
@@ -30,8 +41,21 @@ format:
     search: true
     fontsize: 14pt
 
+# Add syntax highlighting for SystemVerilog
+filters:
+  - quarto
+
+# Language mappings for syntax highlighting
+metadata:
+  lang: en
+  code-annotations: hover
+
 website:
+  title: "SystemVerilog Guide"
+  description: "Comprehensive SystemVerilog Programming Guide"
   sidebar:
+    style: "docked"
+    search: true
     contents:
       - notebooks/Intro.ipynb
       - text: "---"
