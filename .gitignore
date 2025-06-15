@@ -2,3 +2,4 @@
 
 /.quarto/
 /notebooks/Chapter_2_examples/example_1/obj_dir
+*.pyc
