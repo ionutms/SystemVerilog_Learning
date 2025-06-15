@@ -69,19 +69,29 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 6.5: Fix file permissions
-      - name: Fix file permissions
+      # Step 6.5: Debug and fix permissions
+      - name: Debug and fix permissions
         run: |
+          echo "=== Before permission fix ==="
+          ls -la notebooks/
+          echo "=== Fixing permissions ==="
           chmod -R 755 notebooks/
           find notebooks/ -name "*.ipynb" -exec chmod 644 {} \;
+          echo "=== After permission fix ==="
+          ls -la notebooks/
+          echo "=== File contents check ==="
+          file notebooks/Chapter_2.ipynb
+          echo "=== First few lines ==="
+          head -n 3 notebooks/Chapter_2.ipynb
 
-      # Step 7: Render Quarto project (both HTML and PDF)
-      - name: Render Quarto Project
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          path: |
-            notebooks/Chapter_1.ipynb
-            notebooks/Chapter_2.ipynb
+      # Step 7: Render notebooks individually to isolate the issue
+      - name: Render Chapter 1
+        run: |
+          quarto render notebooks/Chapter_1.ipynb
+
+      - name: Render Chapter 2
+        run: |
+          quarto render notebooks/Chapter_2.ipynb
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
