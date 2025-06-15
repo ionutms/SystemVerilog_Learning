@@ -14,52 +14,13 @@ format:
       - bottom=20mm
       - left=15mm
       - right=15mm
-
+    # PDF-specific code formatting
     highlight-style: github
     code-block-bg: "#f8f8f8"
     code-block-border-left: "#e1e4e8"
-
-    keep-tex: true
-
-    include-in-header: |
-      \usepackage{titlesec}
-      \usepackage{needspace}
-
-      % Configure section breaks - force new page for level 2 headings if content is long
-      \titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
-      \titlespacing*{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-
-      % Add page break before subsections (##) if there's insufficient space
-      % This ensures subsections start on new page if remaining space < 6 lines
-      \let\oldsubsection\subsection
-      \renewcommand{\subsection}{\needspace{6\baselineskip}\oldsubsection}
-
-      % Prevent widows and orphans (single lines at top/bottom of pages)
-      \widowpenalty=10000
-      \clubpenalty=10000
-
-      % Better page breaking around figures and tables
-      \renewcommand{\topfraction}{0.85}
-      \renewcommand{\bottomfraction}{0.85}
-      \renewcommand{\textfraction}{0.15}
-      \renewcommand{\floatpagefraction}{0.7}
-
-      % Improve spacing and breaks
-      \raggedbottom
-
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    fig-pos: "H"
-    tbl-pos: "H"
-    colorlinks: true
-    linkcolor: blue
-    urlcolor: blue
-    citecolor: blue
-
   html:
     page-layout: full
-    grid:
+    grid: 
       body-width: 1200px
     theme:
       dark: darkly
@@ -69,7 +30,9 @@ format:
     code-overflow: wrap
     code-fold: false
     code-tools: true
+    # Syntax highlighting
     highlight-style: github
+    # Code block styling
     css: custom.css
     toc: true
     toc-depth: 6
@@ -78,9 +41,11 @@ format:
     search: true
     fontsize: 14pt
 
+# Add syntax highlighting for SystemVerilog
 filters:
   - quarto
 
+# Language mappings for syntax highlighting
 metadata:
   lang: en
   code-annotations: hover
