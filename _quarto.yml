@@ -14,67 +14,52 @@ format:
       - bottom=20mm
       - left=15mm
       - right=15mm
-    
-    # PDF-specific code formatting
+
     highlight-style: github
     code-block-bg: "#f8f8f8"
     code-block-border-left: "#e1e4e8"
-    
-    # Page break and content arrangement options
-    keep-tex: true  # Keep intermediate LaTeX file for debugging
-    
-    # LaTeX includes for better page break control
+
+    keep-tex: true
+
     include-in-header: |
       \usepackage{titlesec}
       \usepackage{needspace}
-      
+
       % Configure section breaks - force new page for level 2 headings if content is long
       \titleformat{\subsection}{\Large\bfseries}{\thesubsection}{1em}{}
       \titlespacing*{\subsection}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-      
+
       % Add page break before subsections (##) if there's insufficient space
       % This ensures subsections start on new page if remaining space < 6 lines
       \let\oldsubsection\subsection
       \renewcommand{\subsection}{\needspace{6\baselineskip}\oldsubsection}
-      
+
       % Prevent widows and orphans (single lines at top/bottom of pages)
       \widowpenalty=10000
       \clubpenalty=10000
-      
+
       % Better page breaking around figures and tables
       \renewcommand{\topfraction}{0.85}
       \renewcommand{\bottomfraction}{0.85}
       \renewcommand{\textfraction}{0.15}
       \renewcommand{\floatpagefraction}{0.7}
-      
+
       % Improve spacing and breaks
-      \raggedbottom  % Allow variable page heights for better breaks
-    
-    # Alternative: Force all level 2 headings to new pages (more aggressive)
-    # Uncomment the following and comment the above needspace approach if preferred
-    # include-in-header: |
-    #   \usepackage{titlesec}
-    #   \newcommand{\sectionbreak}{\clearpage}
-    #   \titleformat{\subsection}{\clearpage\Large\bfseries}{\thesubsection}{1em}{}
-    
-    # Table of contents settings for PDF
+      \raggedbottom
+
     toc: true
     toc-depth: 3
-    number-sections: true  # Add section numbering for better navigation
-    
-    # Figure and table positioning
-    fig-pos: "H"  # Force figures to stay in place
-    tbl-pos: "H"  # Force tables to stay in place
-    
-    # Additional PDF metadata
+    number-sections: true
+    fig-pos: "H"
+    tbl-pos: "H"
     colorlinks: true
     linkcolor: blue
     urlcolor: blue
     citecolor: blue
-    
+
   html:
     page-layout: full
-    grid: 
+    grid:
       body-width: 1200px
     theme:
       dark: darkly
@@ -84,14 +69,8 @@ format:
     code-overflow: wrap
     code-fold: false
     code-tools: true
-    
-    # Syntax highlighting for HTML
     highlight-style: github
-    
-    # Custom CSS for HTML styling
     css: custom.css
-    
-    # Table of contents for HTML
     toc: true
     toc-depth: 6
     toc-location: right
@@ -99,16 +78,13 @@ format:
     search: true
     fontsize: 14pt
 
-# Filters for enhanced processing
 filters:
   - quarto
 
-# Language and annotation settings
 metadata:
   lang: en
   code-annotations: hover
 
-# Website configuration
 website:
   title: "SystemVerilog Guide"
   description: "Comprehensive SystemVerilog Programming Guide"
