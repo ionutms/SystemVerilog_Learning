@@ -5,87 +5,19 @@ project:
 format:
   pdf:
     documentclass: article
-    fontsize: 11pt
+    fontsize: 10pt
     mainfont: "DejaVu Sans"
     sansfont: "DejaVu Sans"
     monofont: "DejaVu Sans Mono"
     geometry:
-      - top=25mm
-      - bottom=25mm
-      - left=20mm
-      - right=20mm
-      - headheight=15mm
-      - headsep=10mm
-      - footskip=10mm
-    # Enhanced PDF formatting
+      - top=20mm
+      - bottom=20mm
+      - left=15mm
+      - right=15mm
+    # PDF-specific code formatting
     highlight-style: github
-    code-block-bg: "#f6f8fa"
-    code-block-border-left: "#d1d9e0"
-    code-line-numbers: true
-    code-overflow: wrap
-    # Table of contents
-    toc: true
-    toc-depth: 3
-    toc-title: "Table of Contents"
-    lof: true  # List of figures
-    lot: true  # List of tables
-    # Headers and footers
-    include-in-header: |
-      \usepackage{fancyhdr}
-      \usepackage{lastpage}
-      \usepackage{xcolor}
-      \usepackage{listings}
-      \pagestyle{fancy}
-      \fancyhf{}
-      \fancyhead[L]{\leftmark}
-      \fancyhead[R]{SystemVerilog Guide}
-      \fancyfoot[C]{Page \thepage\ of \pageref{LastPage}}
-      \renewcommand{\headrulewidth}{0.4pt}
-      \renewcommand{\footrulewidth}{0.4pt}
-    # Code formatting improvements
-    listings-options:
-      - backgroundcolor=\color[RGB]{248,248,248}
-      - frame=single
-      - framesep=3mm
-      - rulecolor=\color[RGB]{225,228,232}
-      - numbers=left
-      - numberstyle=\tiny\color{gray}
-      - stepnumber=1
-      - tabsize=2
-      - breaklines=true
-      - breakatwhitespace=true
-      - showstringspaces=false
-      - basicstyle=\ttfamily\footnotesize
-      - keywordstyle=\color[RGB]{0,92,197}\bfseries
-      - commentstyle=\color[RGB]{106,153,85}\itshape
-      - stringstyle=\color[RGB]{3,47,98}
-    # Figure and table settings
-    fig-cap-location: bottom
-    tbl-cap-location: top
-    fig-width: 6
-    fig-height: 4
-    # Cross-references
-    crossref:
-      fig-title: "Figure"
-      tbl-title: "Table"
-      eq-title: "Equation"
-      sec-prefix: "Section"
-    # Bibliography
-    cite-method: biblatex
-    bibliography-title: "References"
-    # Page formatting
-    linestretch: 1.2
-    fontfamily: libertinus
-    colorlinks: true
-    linkcolor: blue
-    urlcolor: blue
-    citecolor: blue
-    # Advanced formatting
-    keep-tex: true
-    pdf-engine: xelatex
-    template-partials:
-      - title.tex
-    
+    code-block-bg: "#f8f8f8"
+    code-block-border-left: "#e1e4e8"
   html:
     page-layout: full
     grid: 
@@ -170,11 +102,3 @@ website:
       # - text: "Appendices"
       # - text: "---"
       # - notebooks/systemverilog_learning_resources.ipynb
-
-
-
-# Output options
-prefer-html: true
-execute:
-  freeze: auto
-  cache: true
