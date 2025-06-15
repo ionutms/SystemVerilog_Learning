@@ -72,7 +72,10 @@ jobs:
       # Step 7: Render Quarto project (both HTML and PDF)
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
-        # Remove the 'with: to: html' to render all formats
+        with:
+          path: |
+            notebooks/Chapter_1.ipynb
+            notebooks/Chapter_2.ipynb
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
