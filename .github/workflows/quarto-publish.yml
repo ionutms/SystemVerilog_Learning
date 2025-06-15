@@ -69,6 +69,12 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
+      # Step 6.5: Fix file permissions
+      - name: Fix file permissions
+        run: |
+          chmod -R 755 notebooks/
+          find notebooks/ -name "*.ipynb" -exec chmod 644 {} \;
+
       # Step 7: Render Quarto project (both HTML and PDF)
       - name: Render Quarto Project
         uses: quarto-dev/quarto-actions/render@v2
