@@ -1,0 +1,24 @@
+---
+title: "SystemVerilog Guide"
+subtitle: "Comprehensive SystemVerilog Programming Guide"
+---
+
+# Welcome to the SystemVerilog Guide
+
+This comprehensive guide covers SystemVerilog programming from fundamentals to advanced topics.
+
+## Getting Started
+
+- [Introduction](notebooks/Intro.ipynb) - Overview and setup
+- [Chapter 1: Fundamentals](notebooks/Chapter_1.ipynb) - Basic concepts
+- [Chapter 2: Data Types](notebooks/Chapter_2.ipynb) - SystemVerilog data types
+- [Chapter 3: Control Structures](notebooks/Chapter_3.ipynb) - Loops and conditionals
+- [Chapter 4: Modules and Interfaces](notebooks/Chapter_4.ipynb) - Design organization
+
+## Navigation
+
+Use the sidebar to navigate through all chapters, or click on the links above to jump to specific sections.
+
+---
+
+*This guide is designed for both beginners and experienced developers looking to master SystemVerilog.*

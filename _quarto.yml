@@ -53,10 +53,26 @@ metadata:
 website:
   title: "SystemVerilog Guide"
   description: "Comprehensive SystemVerilog Programming Guide"
+  site-url: "https://ionutms.github.io/SystemVerilog_Learning"
+  repo-url: "https://github.com/ionutms/SystemVerilog_Learning"
+  
+  # Add navbar
+  navbar:
+    title: "SystemVerilog Guide"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Introduction" 
+        href: notebooks/Intro.ipynb
+    right:
+      - icon: github
+        href: "https://github.com/ionutms/SystemVerilog_Learning"
+  
   sidebar:
     style: "docked"
     search: true
     contents:
+      - index.qmd
       - notebooks/Intro.ipynb
       - text: "---"
       - text: "Part I: Fundamentals"
