@@ -1,186 +1,61 @@
 name: Render and Deploy Quarto Website
 
-# When to run this workflow
 on:
-  # Trigger on push to publish branch
   push:
     branches: [publish]
-  # Allow manual triggering
   workflow_dispatch:
 
-# Set permissions for GitHub Pages deployment
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Prevent concurrent deployments
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     
     steps:
-      # Step 1: Check out the repository
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Fetch full history for better caching
+          fetch-depth: 0
 
-      # Step 2: Setup Quarto
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # Step 3: Install TinyTeX for PDF generation
-      - name: Install TinyTeX
-        run: |
-          quarto install tinytex
-
-      # Step 4: Setup Python (for Jupyter notebooks)
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.11'
-          cache: 'pip'  # Cache pip dependencies
+          cache: 'pip'
 
-      # Step 5: Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install jupyter nbformat nbconvert
-          # Add any other dependencies your notebook needs
-          # pip install matplotlib numpy pandas seaborn plotly
-          # If you have a requirements.txt file:
-          # pip install -r requirements.txt
+          pip install jupyter nbformat nbconvert matplotlib numpy pandas
 
-      # Step 6: Setup R (if you have R content)
-      # Uncomment if you need R support
-      # - name: Set up R
-      #   uses: r-lib/actions/setup-r@v2
-      #   with:
-      #     r-version: '4.3.1'
+      # SIMPLE: Just render the entire Quarto project
+      - name: Render Quarto project
+        run: quarto render
 
-      # - name: Install R dependencies
-      #   run: |
-      #     install.packages(c("rmarkdown", "knitr"))
-      #   shell: Rscript {0}
-
-      # Step 7: Render notebooks based on configuration
-      - name: Render notebooks based on config
-        run: |
-          # Install yq for YAML parsing
-          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
-          sudo chmod +x /usr/local/bin/yq
-          
-          # Check if configuration file exists
-          if [ -f "render-config.yml" ]; then
-            echo "Using render-config.yml for notebook selection"
-            config_file="render-config.yml"
-          else
-            echo "No render-config.yml found, using fallback configuration"
-            config_file=""
-          fi
-          
-          if [ -n "$config_file" ]; then
-            # Read configuration from file
-            render_all=$(yq '.render.all_notebooks // false' "$config_file")
-            
-            if [ "$render_all" = "true" ]; then
-              echo "Rendering all notebooks"
-              # Find all notebooks and render them
-              notebooks=$(find notebooks/ -name "*.ipynb" -type f 2>/dev/null || echo "")
-              
-              # Get exclusion list
-              excluded_notebooks=$(yq '.render.exclude[]? // ""' "$config_file" 2>/dev/null || echo "")
-              
-              for notebook in $notebooks; do
-                skip=false
-                while IFS= read -r exclude_pattern; do
-                  if [ -n "$exclude_pattern" ] && [ "$notebook" = "$exclude_pattern" ]; then
-                    echo "Skipping excluded notebook: $notebook"
-                    skip=true
-                    break
-                  fi
-                done <<< "$excluded_notebooks"
-                
-                if [ "$skip" = "false" ] && [ -f "$notebook" ]; then
-                  echo "Rendering: $notebook"
-                  quarto render "$notebook"
-                fi
-              done
-            else
-              # Render specific notebooks from config
-              echo "Rendering specific notebooks from configuration"
-              notebooks_to_render=$(yq '.render.notebooks[]? // ""' "$config_file" 2>/dev/null || echo "")
-              
-              if [ -n "$notebooks_to_render" ]; then
-                while IFS= read -r notebook; do
-                  if [ -n "$notebook" ] && [ -f "$notebook" ]; then
-                    echo "Rendering: $notebook"
-                    quarto render "$notebook"
-                  elif [ -n "$notebook" ]; then
-                    echo "Warning: Notebook $notebook not found, skipping"
-                  fi
-                done <<< "$notebooks_to_render"
-              else
-                echo "No notebooks specified in configuration"
-              fi
-            fi
-          else
-            # Fallback to hardcoded list if no config file
-            echo "Using fallback hardcoded notebook list"
-            notebooks=(
-              "notebooks/Intro.ipynb"
-              "notebooks/Chapter_1.ipynb"
-              "notebooks/Chapter_2.ipynb"
-              "notebooks/Chapter_3.ipynb"
-              "notebooks/Chapter_4.ipynb"
-            )
-            
-            for notebook in "${notebooks[@]}"; do
-              if [ -f "$notebook" ]; then
-                echo "Rendering: $notebook"
-                quarto render "$notebook"
-              else
-                echo "Warning: Notebook $notebook not found, skipping"
-              fi
-            done
-          fi
-          
-          # Verify that _site directory was created
-          if [ ! -d "_site" ]; then
-            echo "Warning: _site directory not found, creating minimal site"
-            mkdir -p _site
-            echo "<html><body><h1>No content rendered</h1></body></html>" > _site/index.html
-          fi
-
-      # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Step 9: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
 
-  # Deploy job (only runs on publish branch)
   deploy:
-    # Only deploy on publish, not on PRs
     if: github.ref == 'refs/heads/publish'
-    
-    # Depend on build job
     needs: build
-    
-    # Deploy to GitHub Pages environment
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
     runs-on: ubuntu-latest
     
     steps:

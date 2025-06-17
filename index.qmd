@@ -1,0 +1,47 @@
+---
+title: "SystemVerilog Learning Guide"
+subtitle: "Comprehensive SystemVerilog Programming Guide"
+---
+
+# Welcome to the SystemVerilog Learning Guide
+
+This comprehensive guide will take you from SystemVerilog basics to advanced verification techniques. Use the sidebar navigation to explore different chapters and topics.
+
+## Getting Started
+
+Begin your journey with the [Introduction](notebooks/Intro.html) to understand the scope and structure of this guide.
+
+## Course Structure
+
+This guide is organized into seven main parts:
+
+**Part I: Fundamentals** - Master the basics of SystemVerilog syntax, data types, and operators
+
+**Part II: Design Constructs** - Learn about modules, interfaces, and procedural blocks
+
+**Part III: Object-Oriented Programming** - Explore classes, inheritance, and polymorphism
+
+**Part IV: Verification Features** - Discover assertions, coverage, and randomization
+
+**Part V: Advanced Verification** - Dive into testbenches and UVM methodology
+
+**Part VI: Practical Applications** - Apply your knowledge with real-world examples
+
+**Part VII: Advanced Topics** - Explore SystemC integration and performance optimization
+
+## Navigation
+
+- Use the **sidebar** on the left to navigate between chapters
+- Each chapter builds upon previous concepts
+- Code examples are provided throughout
+- Use the **search function** to find specific topics
+
+## How to Use This Guide
+
+1. **Sequential Learning**: Start with the Introduction and work through each part in order
+2. **Reference Guide**: Jump to specific topics using the sidebar navigation
+3. **Hands-on Practice**: Try the code examples in your SystemVerilog environment
+
+---
+
+**Ready to begin?** Start with the [Introduction](notebooks/Intro.html) or jump to any chapter using the sidebar navigation.

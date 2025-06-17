@@ -14,7 +14,6 @@ format:
       - bottom=20mm
       - left=15mm
       - right=15mm
-    # PDF-specific code formatting
     highlight-style: github
     code-block-bg: "#f8f8f8"
     code-block-border-left: "#e1e4e8"
@@ -30,9 +29,7 @@ format:
     code-overflow: wrap
     code-fold: false
     code-tools: true
-    # Syntax highlighting
     highlight-style: github
-    # Code block styling
     css: custom.css
     toc: true
     toc-depth: 6
@@ -41,11 +38,9 @@ format:
     search: true
     fontsize: 14pt
 
-# Add syntax highlighting for SystemVerilog
 filters:
   - quarto
 
-# Language mappings for syntax highlighting
 metadata:
   lang: en
   code-annotations: hover
@@ -53,10 +48,24 @@ metadata:
 website:
   title: "SystemVerilog Guide"
   description: "Comprehensive SystemVerilog Programming Guide"
+  # Add site URL for proper navigation
+  site-url: "https://ionutms.github.io/SystemVerilog_Learning"
+  
+  # Add a navigation bar
+  navbar:
+    title: "SystemVerilog Guide"
+    left:
+      - href: index.qmd
+        text: "Home"
+      - href: notebooks/Intro.ipynb
+        text: "Introduction"
+  
   sidebar:
     style: "docked"
     search: true
     contents:
+      # IMPORTANT: Add homepage as first item
+      - index.qmd
       - notebooks/Intro.ipynb
       - text: "---"
       - text: "Part I: Fundamentals"
@@ -65,40 +74,39 @@ website:
       - notebooks/Chapter_3.ipynb
       - notebooks/Chapter_4.ipynb
       - text: "---"
-      - text: "Part II: Design Constructs"
-      - notebooks/Chapter_5.ipynb
-      - notebooks/Chapter_6.ipynb
-      - notebooks/Chapter_7.ipynb
-      - notebooks/Chapter_8.ipynb
-      - text: "---"
-      - text: "Part III: Object-Oriented Programming"
-      - notebooks/Chapter_9.ipynb
-      - notebooks/Chapter_10.ipynb
-      - notebooks/Chapter_11.ipynb
-      - text: "---"
-      - text: "Part IV: Verification Features"
-      - notebooks/Chapter_12.ipynb
-      - notebooks/Chapter_13.ipynb
-      - notebooks/Chapter_14.ipynb
-      - notebooks/Chapter_15.ipynb
-      - text: "---"
-      - text: "Part V: Advanced Verification"
-      - notebooks/Chapter_16.ipynb
-      - notebooks/Chapter_17.ipynb
-      - notebooks/Chapter_18.ipynb
-      - notebooks/Chapter_19.ipynb
-      - text: "---"
-      - text: "Part VI: Practical Applications"
-      - notebooks/Chapter_20.ipynb
-      - notebooks/Chapter_21.ipynb
-      - notebooks/Chapter_22.ipynb
-      - notebooks/Chapter_23.ipynb
-      - text: "---"
-      - text: "Part VII: Advanced Topics"
-      - notebooks/Chapter_24.ipynb
-      - notebooks/Chapter_25.ipynb
-      - notebooks/Chapter_26.ipynb
-      - text: "---"
-      - text: "Appendices"
-      - text: "---"
-      - notebooks/systemverilog_learning_resources.ipynb
+      # - text: "Part II: Design Constructs"
+      # - notebooks/Chapter_5.ipynb
+      # - notebooks/Chapter_6.ipynb
+      # - notebooks/Chapter_7.ipynb
+      # - notebooks/Chapter_8.ipynb
+      # - text: "---"
+      # - text: "Part III: Object-Oriented Programming"
+      # - notebooks/Chapter_9.ipynb
+      # - notebooks/Chapter_10.ipynb
+      # - notebooks/Chapter_11.ipynb
+      # - text: "---"
+      # - text: "Part IV: Verification Features"
+      # - notebooks/Chapter_12.ipynb
+      # - notebooks/Chapter_13.ipynb
+      # - notebooks/Chapter_14.ipynb
+      # - notebooks/Chapter_15.ipynb
+      # - text: "---"
+      # - text: "Part V: Advanced Verification"
+      # - notebooks/Chapter_16.ipynb
+      # - notebooks/Chapter_17.ipynb
+      # - notebooks/Chapter_18.ipynb
+      # - notebooks/Chapter_19.ipynb
+      # - text: "---"
+      # - text: "Part VI: Practical Applications"
+      # - notebooks/Chapter_20.ipynb
+      # - notebooks/Chapter_21.ipynb
+      # - notebooks/Chapter_22.ipynb
+      # - notebooks/Chapter_23.ipynb
+      # - text: "---"
+      # - text: "Part VII: Advanced Topics"
+      # - notebooks/Chapter_24.ipynb
+      # - notebooks/Chapter_25.ipynb
+      # - notebooks/Chapter_26.ipynb
+      # - text: "---"
+      # - text: "Appendices"
+      # - notebooks/systemverilog_learning_resources.ipynb
