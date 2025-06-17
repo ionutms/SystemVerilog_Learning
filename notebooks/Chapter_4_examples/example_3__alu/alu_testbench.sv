@@ -65,10 +65,10 @@ module alu_testbench;  // Testbench module
         $dumpfile("alu_testbench.vcd");       // Specify the VCD file
         $dumpvars(0, alu_testbench);          // Dump all variables in the test module
         
+        $display();
         $display("Hello from testbench!");
         $display("Starting ALU Tests");
         $display("==================");
-        $display();
         $display("8-bit ALU with 4-bit opcode");
         $display("Operations: ADD(0), SUB(1), AND(2), OR(3), XOR(4), NOT(5), SHL(6), SHR(7)");
         $display("Zero flag indicates when result equals 0");
