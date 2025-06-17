@@ -1,5 +1,5 @@
-// comparison_example.sv
-module comparison_example;
+// comparison.sv
+module comparison;
     logic [3:0] a = 4'b1010;  // 10 in decimal
     logic [3:0] b = 4'b1010;  // 10 in decimal
     logic [3:0] c = 4'b1x1z;  // Contains unknown (x) and high-impedance (z)

@@ -1,6 +1,6 @@
-// comparison_example_testbench.sv
-module comparison_example_testbench;  // Testbench module
-  comparison_example DESIGN_INSTANCE();  // Instantiate design under test
+// comparison_testbench.sv
+module comparison_testbench;  // Testbench module
+  comparison DESIGN_INSTANCE();  // Instantiate design under test
   
   // Test variables - declared at module level
   logic [3:0] test_a = 4'b1010;
@@ -22,8 +22,8 @@ module comparison_example_testbench;  // Testbench module
   
   initial begin
     // Dump waves
-    $dumpfile("comparison_example_testbench.vcd");
-    $dumpvars(0, comparison_example_testbench);
+    $dumpfile("comparison_testbench.vcd");
+    $dumpvars(0, comparison_testbench);
     #1;
     
     $display("Hello from comparison operations testbench!");
