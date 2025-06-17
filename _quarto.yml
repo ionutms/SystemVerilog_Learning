@@ -96,8 +96,8 @@ website:
       - notebooks/Chapter_3.ipynb
       - notebooks/Chapter_4.ipynb
       # - text: "---"
-      # - text: "Part II: Design Constructs"
-      # - notebooks/Chapter_5.ipynb
+      - text: "Part II: Design Constructs"
+      - notebooks/Chapter_5.ipynb
       # - notebooks/Chapter_6.ipynb
       # - notebooks/Chapter_7.ipynb
       # - notebooks/Chapter_8.ipynb
