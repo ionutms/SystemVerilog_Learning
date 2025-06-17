@@ -4,8 +4,8 @@ module bitwise_testbench;  // Testbench module
 
   initial begin
     // Dump waves
-    $dumpfile("bitwise_example_testbench.vcd");       // Specify the VCD file
-    $dumpvars(0, bitwise_example_testbench);          // Dump all variables in the test module
+    $dumpfile("bitwise_testbench.vcd");       // Specify the VCD file
+    $dumpvars(0, bitwise_testbench);          // Dump all variables in the test module
     #1;                                                       // Wait for a time unit
     $display();                                               // Display empty line
     $display("Hello from logical bitwise testbench!");       // Display message
