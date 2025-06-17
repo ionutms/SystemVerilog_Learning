@@ -63,6 +63,15 @@ website:
   site-url: "https://ionutms.github.io/SystemVerilog_Learning"
   repo-url: "https://github.com/ionutms/SystemVerilog_Learning"
   
+  # Fixed: Add proper base path for GitHub Pages project site
+  site-path: "/SystemVerilog_Learning/"
+  
+  # Fixed: Add page navigation and homepage settings
+  page-navigation: true
+  page-footer: 
+    left: "SystemVerilog Guide"
+    right: "Built with [Quarto](https://quarto.org/)"
+  
   # Add navbar
   navbar:
     title: "SystemVerilog Guide"
@@ -78,6 +87,8 @@ website:
   sidebar:
     style: "docked"
     search: true
+
+    title: "Contents"
     contents:
       - index.qmd
       - notebooks/Intro.ipynb
