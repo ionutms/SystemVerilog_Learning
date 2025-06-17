@@ -5,20 +5,60 @@ subtitle: "Comprehensive SystemVerilog Programming Guide"
 
 # Welcome to the SystemVerilog Guide
 
-This comprehensive guide covers SystemVerilog programming from fundamentals to advanced topics.
+This comprehensive guide covers SystemVerilog programming from fundamentals to advanced topics, designed for both beginners and experienced developers looking to master SystemVerilog.
 
 ## Getting Started
 
 - [Introduction](notebooks/Intro.ipynb) - Overview and setup
-- [Chapter 1: Fundamentals](notebooks/Chapter_1.ipynb) - Basic concepts
-- [Chapter 2: Data Types](notebooks/Chapter_2.ipynb) - SystemVerilog data types
+
+## Part I: Fundamentals
+
+- [Chapter 1: Fundamentals](notebooks/Chapter_1.ipynb) - Basic concepts and syntax
+- [Chapter 2: Data Types](notebooks/Chapter_2.ipynb) - SystemVerilog data types and variables
 - [Chapter 3: Control Structures](notebooks/Chapter_3.ipynb) - Loops and conditionals
 - [Chapter 4: Modules and Interfaces](notebooks/Chapter_4.ipynb) - Design organization
 
+## Additional Chapters (Coming Soon)
+
+- [Chapter 5](notebooks/Chapter_5.ipynb) - To be added
+- [Chapter 6](notebooks/Chapter_6.ipynb) - To be added
+- [Chapter 7](notebooks/Chapter_7.ipynb) - To be added
+- [Chapter 8](notebooks/Chapter_8.ipynb) - To be added
+- [Chapter 9](notebooks/Chapter_9.ipynb) - To be added
+- [Chapter 10](notebooks/Chapter_10.ipynb) - To be added
+- [Chapter 11](notebooks/Chapter_11.ipynb) - To be added
+- [Chapter 12](notebooks/Chapter_12.ipynb) - To be added
+- [Chapter 13](notebooks/Chapter_13.ipynb) - To be added
+- [Chapter 14](notebooks/Chapter_14.ipynb) - To be added
+- [Chapter 15](notebooks/Chapter_15.ipynb) - To be added
+- [Chapter 16](notebooks/Chapter_16.ipynb) - To be added
+- [Chapter 17](notebooks/Chapter_17.ipynb) - To be added
+- [Chapter 18](notebooks/Chapter_18.ipynb) - To be added
+- [Chapter 19](notebooks/Chapter_19.ipynb) - To be added
+- [Chapter 20](notebooks/Chapter_20.ipynb) - To be added
+- [Chapter 21](notebooks/Chapter_21.ipynb) - To be added
+- [Chapter 22](notebooks/Chapter_22.ipynb) - To be added
+- [Chapter 23](notebooks/Chapter_23.ipynb) - To be added
+- [Chapter 24](notebooks/Chapter_24.ipynb) - To be added
+- [Chapter 25](notebooks/Chapter_25.ipynb) - To be added
+- [Chapter 26](notebooks/Chapter_26.ipynb) - To be added
+
+## Additional Resources
+
+- [SystemVerilog Learning Resources](notebooks/systemverilog_learning_resources.ipynb) - Additional resources and references
+
 ## Navigation
 
-Use the sidebar to navigate through all chapters, or click on the links above to jump to specific sections.
+Use the sidebar to navigate through all chapters, or click on the links above to jump to specific sections. Each chapter builds upon previous concepts, so it's recommended to follow the sequential order for beginners.
+
+## Features of This Guide
+
+- **Interactive Examples**: Each chapter includes hands-on examples and exercises
+- **Code Samples**: Practical SystemVerilog code with detailed explanations
+- **Best Practices**: Industry-standard coding practices and methodologies
+- **Verification Focus**: Strong emphasis on verification techniques and UVM
+- **Progressive Learning**: From basic syntax to advanced verification concepts
 
 ---
 
-*This guide is designed for both beginners and experienced developers looking to master SystemVerilog.*
+*This guide is continuously updated with the latest SystemVerilog features and verification methodologies.*
