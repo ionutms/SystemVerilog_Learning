@@ -1,5 +1,5 @@
-// reduction_example.sv
-module reduction_example;
+// reduction.sv
+module reduction;
     logic [7:0] data = 8'b11010010;
     logic result;
     
