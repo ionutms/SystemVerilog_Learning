@@ -26,7 +26,7 @@ module parallel_to_serial_testbench;
         $display("%s", description);
         $display("Time: %4t | Load: %b | Parallel_in: %8b (%02h) | Serial_out: %b | Done: %b | Count: %d | Shift_reg: %8b", 
                  $time, load, parallel_in, parallel_in, serial_out, done, DUT.count, DUT.shift_reg);
-        $display("-------------------------------------------------------------------------------------");
+        $display("---------------------------------------------------------");
     endtask
     
     // Test stimulus
