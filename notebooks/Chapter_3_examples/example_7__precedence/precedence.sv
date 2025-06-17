@@ -1,5 +1,5 @@
-// precedence_example.sv
-module precedence_example;
+// precedence.sv
+module precedence;
     logic [7:0] a = 8'd2;
     logic [7:0] b = 8'd3;
     logic [7:0] c = 8'd4;
