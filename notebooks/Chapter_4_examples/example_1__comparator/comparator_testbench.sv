@@ -20,7 +20,6 @@ module comparator_testbench;  // Testbench module
         $dumpvars(0, comparator_testbench);          // Dump all variables in the test module
         
         $display();
-        $display("Hello from testbench!");
         $display("Starting Comparator Tests");
         $display("====================");
         $display();
