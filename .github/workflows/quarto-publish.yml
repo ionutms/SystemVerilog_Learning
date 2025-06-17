@@ -69,29 +69,28 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 7: Extract and render only notebooks listed in _quarto.yml sidebar
-      - name: Render selected notebooks from _quarto.yml
+      # Step 7: Render specific notebooks
+      - name: Render selected notebooks
         run: |
-          # Extract .ipynb files from _quarto.yml sidebar contents
-          grep -o 'notebooks/[^[:space:]]*\.ipynb' _quarto.yml | while read notebook; do
-            if [ -f "$notebook" ]; then
-              echo "Rendering $notebook"
-              quarto render "$notebook"
-            else
-              echo "Warning: $notebook not found, skipping"
-            fi
+          # List the specific notebooks you want to render
+          notebooks=(
+            "notebooks/Intro.ipynb"
+            "notebooks/Chapter_1.ipynb"
+            "notebooks/Chapter_2.ipynb"
+            "notebooks/Chapter_3.ipynb"
+            "notebooks/Chapter_4.ipynb"
+          )
+          
+          for notebook in "${notebooks[@]}"; do
+            echo "Rendering $notebook"
+            quarto render "$notebook"
           done
 
-      # Step 8: Build complete website
-      - name: Build website
-        run: |
-          quarto render
-
-      # Step 9: Setup GitHub Pages (configure before upload)
+      # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Step 10: Upload artifact for GitHub Pages
+      # Step 9: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
