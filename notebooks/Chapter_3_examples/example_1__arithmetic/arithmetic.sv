@@ -1,5 +1,5 @@
 // arithmetic_example.sv
-module arithmetic_example;
+module arithmetic;
     logic [7:0] a = 8'd25;
     logic [7:0] b = 8'd5;
     logic [15:0] result;
