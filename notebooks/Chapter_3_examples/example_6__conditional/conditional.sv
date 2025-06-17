@@ -1,5 +1,5 @@
-// conditional_example.sv
-module conditional_example;
+// conditional.sv
+module conditional;
     logic [7:0] a = 8'd10;
     logic [7:0] b = 8'd20;
     logic [7:0] max_val;
