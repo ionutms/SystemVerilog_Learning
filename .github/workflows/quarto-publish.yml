@@ -69,22 +69,11 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 7: Render specific notebooks
-      - name: Render selected notebooks
+      # Step 7: Render the entire website (this will respect _quarto.yml render list)
+      - name: Render website
         run: |
-          # List the specific notebooks you want to render
-          notebooks=(
-            "notebooks/Intro.ipynb"
-            "notebooks/Chapter_1.ipynb"
-            "notebooks/Chapter_2.ipynb"
-            "notebooks/Chapter_3.ipynb"
-            "notebooks/Chapter_4.ipynb"
-          )
-          
-          for notebook in "${notebooks[@]}"; do
-            echo "Rendering $notebook"
-            quarto render "$notebook"
-          done
+          echo "Rendering entire website using _quarto.yml configuration"
+          quarto render
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
