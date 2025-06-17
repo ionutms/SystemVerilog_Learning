@@ -1,6 +1,6 @@
 // bitwise_example_testbench.sv
-module bitwise_example_testbench;  // Testbench module
-  bitwise_example DESIGN_INSTANCE();  // Instantiate design under test
+module bitwise_testbench;  // Testbench module
+  bitwise DESIGN_INSTANCE();  // Instantiate design under test
 
   initial begin
     // Dump waves

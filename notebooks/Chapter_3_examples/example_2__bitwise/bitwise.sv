@@ -1,5 +1,5 @@
-// bitwise_example.sv
-module bitwise_example;
+// bitwise.sv
+module bitwise;
     logic [3:0] a = 4'b1010;
     logic [3:0] b = 4'b1100;
     logic [3:0] result;
