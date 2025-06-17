@@ -1,6 +1,6 @@
-// shift_example_testbench.sv
-module shift_example_testbench;  // Testbench module
-  shift_example DESIGN_INSTANCE();  // Instantiate design under test
+// shift_testbench.sv
+module shift_testbench;  // Testbench module
+  shift DESIGN_INSTANCE();  // Instantiate design under test
   
   // Variables for verification - moved to module level
   logic [7:0] test_data = 8'b10110100;
@@ -13,8 +13,8 @@ module shift_example_testbench;  // Testbench module
   
   initial begin
     // Dump waves
-    $dumpfile("shift_example_testbench.vcd");       // Specify the VCD file
-    $dumpvars(0, shift_example_testbench);          // Dump all variables in the test module
+    $dumpfile("shift_testbench.vcd");       // Specify the VCD file
+    $dumpvars(0, shift_testbench);          // Dump all variables in the test module
     #1;                                             // Wait for a time unit
     $display("Hello from shift operations testbench!");       // Display message
     $display("Testing all shift operators...");

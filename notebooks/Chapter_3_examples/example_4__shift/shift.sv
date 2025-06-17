@@ -1,5 +1,5 @@
-// shift_example.sv
-module shift_example;
+// shift.sv
+module shift;
     logic [7:0] data = 8'b10110100;
     logic signed [7:0] signed_data = 8'sb10110100; // -76 in decimal
     logic [7:0] result;
