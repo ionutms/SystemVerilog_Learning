@@ -77,6 +77,8 @@ jobs:
             "notebooks/Intro.ipynb"
             "notebooks/Chapter_1.ipynb"
             "notebooks/Chapter_2.ipynb"
+            "notebooks/Chapter_3.ipynb"
+            "notebooks/Chapter_4.ipynb"
           )
           
           for notebook in "${notebooks[@]}"; do
