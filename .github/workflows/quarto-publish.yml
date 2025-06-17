@@ -69,22 +69,94 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 7: Render specific notebooks
-      - name: Render selected notebooks
+      # Step 7: Render notebooks based on configuration
+      - name: Render notebooks based on config
         run: |
-          # List the specific notebooks you want to render
-          notebooks=(
-            "notebooks/Intro.ipynb"
-            "notebooks/Chapter_1.ipynb"
-            "notebooks/Chapter_2.ipynb"
-            "notebooks/Chapter_3.ipynb"
-            "notebooks/Chapter_4.ipynb"
-          )
+          # Install yq for YAML parsing
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
           
-          for notebook in "${notebooks[@]}"; do
-            echo "Rendering $notebook"
-            quarto render "$notebook"
-          done
+          # Check if configuration file exists
+          if [ -f "render-config.yml" ]; then
+            echo "Using render-config.yml for notebook selection"
+            config_file="render-config.yml"
+          else
+            echo "No render-config.yml found, using fallback configuration"
+            config_file=""
+          fi
+          
+          if [ -n "$config_file" ]; then
+            # Read configuration from file
+            render_all=$(yq '.render.all_notebooks // false' "$config_file")
+            
+            if [ "$render_all" = "true" ]; then
+              echo "Rendering all notebooks"
+              # Find all notebooks and render them
+              notebooks=$(find notebooks/ -name "*.ipynb" -type f 2>/dev/null || echo "")
+              
+              # Get exclusion list
+              excluded_notebooks=$(yq '.render.exclude[]? // ""' "$config_file" 2>/dev/null || echo "")
+              
+              for notebook in $notebooks; do
+                skip=false
+                while IFS= read -r exclude_pattern; do
+                  if [ -n "$exclude_pattern" ] && [ "$notebook" = "$exclude_pattern" ]; then
+                    echo "Skipping excluded notebook: $notebook"
+                    skip=true
+                    break
+                  fi
+                done <<< "$excluded_notebooks"
+                
+                if [ "$skip" = "false" ] && [ -f "$notebook" ]; then
+                  echo "Rendering: $notebook"
+                  quarto render "$notebook"
+                fi
+              done
+            else
+              # Render specific notebooks from config
+              echo "Rendering specific notebooks from configuration"
+              notebooks_to_render=$(yq '.render.notebooks[]? // ""' "$config_file" 2>/dev/null || echo "")
+              
+              if [ -n "$notebooks_to_render" ]; then
+                while IFS= read -r notebook; do
+                  if [ -n "$notebook" ] && [ -f "$notebook" ]; then
+                    echo "Rendering: $notebook"
+                    quarto render "$notebook"
+                  elif [ -n "$notebook" ]; then
+                    echo "Warning: Notebook $notebook not found, skipping"
+                  fi
+                done <<< "$notebooks_to_render"
+              else
+                echo "No notebooks specified in configuration"
+              fi
+            fi
+          else
+            # Fallback to hardcoded list if no config file
+            echo "Using fallback hardcoded notebook list"
+            notebooks=(
+              "notebooks/Intro.ipynb"
+              "notebooks/Chapter_1.ipynb"
+              "notebooks/Chapter_2.ipynb"
+              "notebooks/Chapter_3.ipynb"
+              "notebooks/Chapter_4.ipynb"
+            )
+            
+            for notebook in "${notebooks[@]}"; do
+              if [ -f "$notebook" ]; then
+                echo "Rendering: $notebook"
+                quarto render "$notebook"
+              else
+                echo "Warning: Notebook $notebook not found, skipping"
+              fi
+            done
+          fi
+          
+          # Verify that _site directory was created
+          if [ ! -d "_site" ]; then
+            echo "Warning: _site directory not found, creating minimal site"
+            mkdir -p _site
+            echo "<html><body><h1>No content rendered</h1></body></html>" > _site/index.html
+          fi
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
