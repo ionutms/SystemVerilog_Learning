@@ -30,6 +30,13 @@ project:
     # - "notebooks/Chapter_24.ipynb"
     # - "notebooks/Chapter_25.ipynb"
     # - "notebooks/Chapter_26.ipynb"
+    # - "notebooks/Appendix_A.ipynb"
+    # - "notebooks/Appendix_B.ipynb"
+    # - "notebooks/Appendix_C.ipynb"
+    # - "notebooks/Appendix_D.ipynb"
+    # - "notebooks/Appendix_E.ipynb"
+    # - "notebooks/Appendix_F.ipynb"
+    # - "notebooks/Appendix_G.ipynb"
 
 format:
   pdf:
@@ -153,5 +160,11 @@ website:
       - notebooks/Chapter_26.ipynb
       - text: "---"
       - text: "Appendices"
+      - notebooks/Appendix_A.ipynb
+      - notebooks/Appendix_B.ipynb
+      - notebooks/Appendix_C.ipynb
+      - notebooks/Appendix_D.ipynb
+      - notebooks/Appendix_E.ipynb
+      - notebooks/Appendix_F.ipynb
+      - notebooks/Appendix_G.ipynb
       - text: "---"
-      - notebooks/systemverilog_learning_resources.ipynb
