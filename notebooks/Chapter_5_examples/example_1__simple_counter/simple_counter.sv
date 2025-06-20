@@ -79,11 +79,16 @@ module simple_counter #(
     
     // Assertions for parameter validation (synthesis will ignore these)
     initial begin
-        assert (WIDTH > 0) else $error("WIDTH parameter must be greater than 0");
-        assert (MAX_COUNT >= 0) else $error("MAX_COUNT parameter must be non-negative");
-        assert (MAX_COUNT < (2**WIDTH)) else $error("MAX_COUNT exceeds maximum value for given WIDTH");
-        assert (RESET_VALUE >= 0) else $error("RESET_VALUE parameter must be non-negative");
-        assert (RESET_VALUE < (2**WIDTH)) else $error("RESET_VALUE exceeds maximum value for given WIDTH");
+        assert (WIDTH > 0)
+            else $error("WIDTH parameter must be greater than 0");
+        assert (MAX_COUNT >= 0)
+            else $error("MAX_COUNT parameter must be non-negative");
+        assert (MAX_COUNT < (2**WIDTH))
+            else $error("MAX_COUNT exceeds maximum value for given WIDTH");
+        assert (RESET_VALUE >= 0)
+            else $error("RESET_VALUE parameter must be non-negative");
+        assert (RESET_VALUE < (2**WIDTH))
+            else $error("RESET_VALUE exceeds maximum value for given WIDTH");
         
         $display("Simple Counter Module Initialized:");
         $display("  WIDTH = %0d bits", WIDTH);

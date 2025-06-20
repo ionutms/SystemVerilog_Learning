@@ -86,7 +86,8 @@ module simple_counter_testbench;
         #(CLK_PERIOD * 2);
         reset_n = 1;
         #(CLK_PERIOD);
-        $display("After reset - DUT1 count: %0d, DUT2 count: %0d", count, count2);
+        $display("After reset - DUT1 count: %0d", count);
+        $display("After reset - DUT2 count: %0d", count2);
         $display();
         
         // Test counting up
@@ -96,8 +97,10 @@ module simple_counter_testbench;
         
         repeat (TEST_MAX + 3) begin
             #(CLK_PERIOD);
-            $display("Count up - DUT1: %0d (overflow=%b, max_reached=%b), DUT2: %0d (overflow=%b)", 
-                    count, overflow, max_reached, count2, overflow2);
+            $display(
+                "Count up - DUT1: %0d (overflow=%b, max_reached=%b)", 
+                count, overflow, max_reached);
+            $display("Count up - DUT2: %0d (overflow=%b)", count2, overflow2);
         end
         $display();
         
@@ -107,8 +110,10 @@ module simple_counter_testbench;
         
         repeat (TEST_MAX + 3) begin
             #(CLK_PERIOD);
-            $display("Count down - DUT1: %0d (underflow=%b), DUT2: %0d (underflow=%b)", 
-                    count, underflow, count2, underflow2);
+            $display(
+                "Count down - DUT1: %0d (underflow=%b)", count, underflow);
+            $display(
+                "Count down - DUT2: %0d (underflow=%b)", count2, underflow2);
         end
         $display();
         
