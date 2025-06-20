@@ -75,7 +75,7 @@ format:
     toc-location: right
     toc-title: "Contents"
     search: true
-    fontsize: 14pt
+    fontsize: 12pt
 
 # Add syntax highlighting for SystemVerilog
 filters:
