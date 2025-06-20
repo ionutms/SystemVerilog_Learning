@@ -71,6 +71,7 @@ module simple_counter_testbench;
         $dumpfile("simple_counter_testbench.vcd");
         $dumpvars(0, simple_counter_testbench);
         
+        $display();
         $display("=== Simple Counter Testbench Started ===");
         $display();
         
@@ -165,6 +166,7 @@ module simple_counter_testbench;
         
         $display("=== Simple Counter Testbench Completed ===");
         $display("Total simulation time: %0t", $time);
+        $display();
         $finish;
     end
     

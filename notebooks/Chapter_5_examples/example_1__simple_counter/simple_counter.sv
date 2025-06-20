@@ -90,6 +90,7 @@ module simple_counter #(
         assert (RESET_VALUE < (2**WIDTH))
             else $error("RESET_VALUE exceeds maximum value for given WIDTH");
         
+        $display();
         $display("Simple Counter Module Initialized:");
         $display("  WIDTH = %0d bits", WIDTH);
         $display("  MAX_COUNT = %0d", MAX_COUNT);
