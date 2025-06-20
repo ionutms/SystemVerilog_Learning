@@ -11,12 +11,13 @@ import subprocess
 import textwrap
 
 
-def run_docker_compose(target_dir):
+def run_docker_compose(*, target_dir=str, strip_lines=False) -> int:
     """
     Run Docker Compose with Verilator in the specified target directory.
 
     Args:
         target_dir (str): Path to the target directory containing .env file
+        strip_lines (bool): Whether to strip first and last lines from output
 
     Returns:
         int:
@@ -32,7 +33,7 @@ def run_docker_compose(target_dir):
             print(f"Error: Environment file not found at {env_file_path}")
             return 1
         else:
-            print("Docker Compose Output:")
+            print("Verilator Simulation Output:")
             print("=" * 80)
 
             docker_output = []
@@ -51,7 +52,19 @@ def run_docker_compose(target_dir):
                 bufsize=1,
             )
 
-            for line in process.stdout:
+            # Get all lines from process output
+            all_lines = list(process.stdout)
+
+            # Apply stripping if enabled
+            if (
+                strip_lines and len(all_lines) > 18
+            ):  # Need at least 18 lines to strip 14 from start and 4 from end
+                lines_to_process = all_lines[14:-4]
+            else:
+                lines_to_process = all_lines
+
+            # Process the lines
+            for line in lines_to_process:
                 clean_line = line.rstrip()
                 docker_output.append(clean_line)
                 if len(clean_line) > 80:
