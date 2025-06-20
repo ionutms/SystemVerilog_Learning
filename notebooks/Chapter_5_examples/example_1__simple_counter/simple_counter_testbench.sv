@@ -2,7 +2,7 @@
 module simple_counter_testbench;
 
     // Testbench parameters
-    localparam int CLK_PERIOD = 10; // 100MHz clock
+    localparam int CLK_PERIOD = 10;  // 100MHz clock
     localparam int TEST_WIDTH = 4;   // 4-bit counter for easy testing
     localparam int TEST_MAX = 12;    // Max count less than 2^4-1 for testing
     
@@ -146,8 +146,12 @@ module simple_counter_testbench;
         
         // Test different parameter behavior
         $display("Phase 6: Parameter Comparison");
-        $display("DUT1 (4-bit, wrap-around): count=%0d, max_count=%0d", count, TEST_MAX);
-        $display("DUT2 (8-bit, saturation): count=%0d, max_count=255", count2);
+        $display(
+            "DUT1 (4-bit, wrap-around): count=%0d, max_count=%0d",
+            count, TEST_MAX);
+        $display(
+            "DUT2 (8-bit, saturation): count=%0d, max_count=255",
+            count2);
         $display();
         
         // Final phase - reset test
@@ -168,11 +172,17 @@ module simple_counter_testbench;
     always @(posedge clk) begin
         if (reset_n) begin
             if (overflow)
-                $display("*** OVERFLOW detected at time %0t, count=%0d ***", $time, count);
+                $display(
+                    "*** OVERFLOW detected at time %0t, count=%0d ***",
+                    $time, count);
             if (underflow)
-                $display("*** UNDERFLOW detected at time %0t, count=%0d ***", $time, count);
+                $display(
+                    "*** UNDERFLOW detected at time %0t, count=%0d ***",
+                    $time, count);
             if (max_reached && enable)
-                $display("*** MAX_REACHED at time %0t, count=%0d ***", $time, count);
+                $display(
+                    "*** MAX_REACHED at time %0t, count=%0d ***",
+                    $time, count);
         end
     end
 
