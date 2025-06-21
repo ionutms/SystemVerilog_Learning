@@ -3,386 +3,245 @@ $timescale 1ps $end
  $scope module $rootio $end
  $upscope $end
  $scope module localparam_calculator_testbench $end
-  $var wire 1 M clk $end
-  $var wire 1 # reset_n $end
-  $var wire 16 $ mult_a [15:0] $end
-  $var wire 16 % mult_b [15:0] $end
-  $var wire 16 , mult_result [15:0] $end
-  $var wire 1 & mult_start $end
-  $var wire 1 - mult_valid $end
-  $var wire 16 . mult_result_fast [15:0] $end
-  $var wire 1 / mult_valid_fast $end
-  $var wire 1 ' fifo_push $end
-  $var wire 1 ( fifo_pop $end
-  $var wire 8 ) fifo_data_in [7:0] $end
-  $var wire 8 0 fifo_data_out [7:0] $end
-  $var wire 1 1 fifo_full $end
-  $var wire 1 2 fifo_empty $end
-  $var wire 1 3 fifo_almost_full $end
-  $var wire 1 4 fifo_almost_empty $end
-  $scope module mult_fast $end
-   $var wire 32 N DATA_WIDTH [31:0] $end
-   $var wire 32 O FRAC_BITS [31:0] $end
-   $var real 64 P CLK_FREQ_MHZ $end
-   $var wire 1 M clk $end
-   $var wire 1 # reset_n $end
-   $var wire 16 $ a [15:0] $end
-   $var wire 16 % b [15:0] $end
-   $var wire 1 & start $end
-   $var wire 16 . result [15:0] $end
-   $var wire 1 / valid $end
-   $var wire 32 R PRODUCT_WIDTH [31:0] $end
-   $var wire 32 O INT_BITS [31:0] $end
-   $var wire 16 S MAX_VALUE [15:0] $end
-   $var wire 16 T MIN_VALUE [15:0] $end
-   $var real 64 U CLK_PERIOD_NS $end
-   $var wire 32 W PIPELINE_STAGES [31:0] $end
-   $var wire 32 X TIMEOUT_CYCLES [31:0] $end
-   $var wire 16 . mult_result [15:0] $end
-   $var wire 1 / mult_valid $end
-   $scope module two_stage $end
-    $var wire 16 5 a_reg [15:0] $end
-    $var wire 16 6 b_reg [15:0] $end
-    $var wire 32 7 product_reg [31:0] $end
-    $var wire 1 8 start_reg $end
-   $upscope $end
+  $var wire 1 & clk $end
+  $var wire 1 ' reset $end
+  $scope module default_calc $end
+   $var wire 32 ( DATA_WIDTH [31:0] $end
+   $var wire 32 ) NUM_ELEMENTS [31:0] $end
+   $var wire 1 & clk $end
+   $var wire 1 ' reset $end
+   $var wire 32 * ADDR_WIDTH [31:0] $end
+   $var wire 32 + TOTAL_BITS [31:0] $end
+   $var wire 32 , MAX_VALUE [31:0] $end
+   $var wire 32 ( HALF_ELEMENTS [31:0] $end
+   $var wire 8 - memory[0] [7:0] $end
+   $var wire 8 . memory[1] [7:0] $end
+   $var wire 8 / memory[2] [7:0] $end
+   $var wire 8 0 memory[3] [7:0] $end
+   $var wire 8 1 memory[4] [7:0] $end
+   $var wire 8 2 memory[5] [7:0] $end
+   $var wire 8 3 memory[6] [7:0] $end
+   $var wire 8 4 memory[7] [7:0] $end
+   $var wire 8 5 memory[8] [7:0] $end
+   $var wire 8 6 memory[9] [7:0] $end
+   $var wire 8 7 memory[10] [7:0] $end
+   $var wire 8 8 memory[11] [7:0] $end
+   $var wire 8 9 memory[12] [7:0] $end
+   $var wire 8 : memory[13] [7:0] $end
+   $var wire 8 ; memory[14] [7:0] $end
+   $var wire 8 < memory[15] [7:0] $end
+   $var wire 4 # address [3:0] $end
   $upscope $end
-  $scope module mult_slow $end
-   $var wire 32 N DATA_WIDTH [31:0] $end
-   $var wire 32 O FRAC_BITS [31:0] $end
-   $var real 64 Y CLK_FREQ_MHZ $end
-   $var wire 1 M clk $end
-   $var wire 1 # reset_n $end
-   $var wire 16 $ a [15:0] $end
-   $var wire 16 % b [15:0] $end
-   $var wire 1 & start $end
-   $var wire 16 , result [15:0] $end
-   $var wire 1 - valid $end
-   $var wire 32 R PRODUCT_WIDTH [31:0] $end
-   $var wire 32 O INT_BITS [31:0] $end
-   $var wire 16 S MAX_VALUE [15:0] $end
-   $var wire 16 T MIN_VALUE [15:0] $end
-   $var real 64 [ CLK_PERIOD_NS $end
-   $var wire 32 ] PIPELINE_STAGES [31:0] $end
-   $var wire 32 ^ TIMEOUT_CYCLES [31:0] $end
-   $var wire 16 , mult_result [15:0] $end
-   $var wire 1 - mult_valid $end
-   $scope module single_stage $end
-    $var wire 32 9 product [31:0] $end
-   $upscope $end
+  $scope module small_wide_calc $end
+   $var wire 32 * DATA_WIDTH [31:0] $end
+   $var wire 32 = NUM_ELEMENTS [31:0] $end
+   $var wire 1 & clk $end
+   $var wire 1 ' reset $end
+   $var wire 32 > ADDR_WIDTH [31:0] $end
+   $var wire 32 + TOTAL_BITS [31:0] $end
+   $var wire 32 ? MAX_VALUE [31:0] $end
+   $var wire 32 ) HALF_ELEMENTS [31:0] $end
+   $var wire 4 @ memory[0] [3:0] $end
+   $var wire 4 A memory[1] [3:0] $end
+   $var wire 4 B memory[2] [3:0] $end
+   $var wire 4 C memory[3] [3:0] $end
+   $var wire 4 D memory[4] [3:0] $end
+   $var wire 4 E memory[5] [3:0] $end
+   $var wire 4 F memory[6] [3:0] $end
+   $var wire 4 G memory[7] [3:0] $end
+   $var wire 4 H memory[8] [3:0] $end
+   $var wire 4 I memory[9] [3:0] $end
+   $var wire 4 J memory[10] [3:0] $end
+   $var wire 4 K memory[11] [3:0] $end
+   $var wire 4 L memory[12] [3:0] $end
+   $var wire 4 M memory[13] [3:0] $end
+   $var wire 4 N memory[14] [3:0] $end
+   $var wire 4 O memory[15] [3:0] $end
+   $var wire 4 P memory[16] [3:0] $end
+   $var wire 4 Q memory[17] [3:0] $end
+   $var wire 4 R memory[18] [3:0] $end
+   $var wire 4 S memory[19] [3:0] $end
+   $var wire 4 T memory[20] [3:0] $end
+   $var wire 4 U memory[21] [3:0] $end
+   $var wire 4 V memory[22] [3:0] $end
+   $var wire 4 W memory[23] [3:0] $end
+   $var wire 4 X memory[24] [3:0] $end
+   $var wire 4 Y memory[25] [3:0] $end
+   $var wire 4 Z memory[26] [3:0] $end
+   $var wire 4 [ memory[27] [3:0] $end
+   $var wire 4 \ memory[28] [3:0] $end
+   $var wire 4 ] memory[29] [3:0] $end
+   $var wire 4 ^ memory[30] [3:0] $end
+   $var wire 4 _ memory[31] [3:0] $end
+   $var wire 5 $ address [4:0] $end
   $upscope $end
-  $scope module test_fifo $end
-   $var wire 32 O DATA_WIDTH [31:0] $end
-   $var wire 32 _ MIN_DEPTH [31:0] $end
-   $var wire 1 M clk $end
-   $var wire 1 # reset_n $end
-   $var wire 1 ' push $end
-   $var wire 1 ( pop $end
-   $var wire 8 ) data_in [7:0] $end
-   $var wire 8 0 data_out [7:0] $end
-   $var wire 1 1 full $end
-   $var wire 1 2 empty $end
-   $var wire 1 3 almost_full $end
-   $var wire 1 4 almost_empty $end
+  $scope module wide_narrow_calc $end
+   $var wire 32 ) DATA_WIDTH [31:0] $end
+   $var wire 32 ( NUM_ELEMENTS [31:0] $end
+   $var wire 1 & clk $end
+   $var wire 1 ' reset $end
    $var wire 32 ` ADDR_WIDTH [31:0] $end
-   $var wire 32 N ACTUAL_DEPTH [31:0] $end
-   $var wire 32 a ALMOST_FULL_THRESH [31:0] $end
-   $var wire 32 ` ALMOST_EMPTY_THRESH [31:0] $end
-   $var wire 5 b FULL_COUNT [4:0] $end
-   $var wire 8 : memory[0] [7:0] $end
-   $var wire 8 ; memory[1] [7:0] $end
-   $var wire 8 < memory[2] [7:0] $end
-   $var wire 8 = memory[3] [7:0] $end
-   $var wire 8 > memory[4] [7:0] $end
-   $var wire 8 ? memory[5] [7:0] $end
-   $var wire 8 @ memory[6] [7:0] $end
-   $var wire 8 A memory[7] [7:0] $end
-   $var wire 8 B memory[8] [7:0] $end
-   $var wire 8 C memory[9] [7:0] $end
-   $var wire 8 D memory[10] [7:0] $end
-   $var wire 8 E memory[11] [7:0] $end
-   $var wire 8 F memory[12] [7:0] $end
-   $var wire 8 G memory[13] [7:0] $end
-   $var wire 8 H memory[14] [7:0] $end
-   $var wire 8 I memory[15] [7:0] $end
-   $var wire 4 J write_ptr [3:0] $end
-   $var wire 4 K read_ptr [3:0] $end
-   $var wire 5 L count [4:0] $end
-  $upscope $end
-  $scope module unnamedblk1 $end
-   $var wire 32 * i [31:0] $end
-  $upscope $end
-  $scope module unnamedblk2 $end
-   $var wire 32 + i [31:0] $end
+   $var wire 32 + TOTAL_BITS [31:0] $end
+   $var wire 32 a MAX_VALUE [31:0] $end
+   $var wire 32 * HALF_ELEMENTS [31:0] $end
+   $var wire 16 b memory[0] [15:0] $end
+   $var wire 16 c memory[1] [15:0] $end
+   $var wire 16 d memory[2] [15:0] $end
+   $var wire 16 e memory[3] [15:0] $end
+   $var wire 16 f memory[4] [15:0] $end
+   $var wire 16 g memory[5] [15:0] $end
+   $var wire 16 h memory[6] [15:0] $end
+   $var wire 16 i memory[7] [15:0] $end
+   $var wire 3 % address [2:0] $end
   $upscope $end
  $upscope $end
 $enddefinitions $end
 
 
 #0
-0#
-b0000000000000000 $
-b0000000000000000 %
+b0000 #
+b00000 $
+b000 %
 0&
-0'
-0(
-b00000000 )
-b00000000000000000000000000000000 *
-b00000000000000000000000000000000 +
-b0000000000000000 ,
-0-
-b0000000000000000 .
-0/
+1'
+b00000000000000000000000000001000 (
+b00000000000000000000000000010000 )
+b00000000000000000000000000000100 *
+b00000000000000000000000010000000 +
+b00000000000000000000000011111111 ,
+b00000000 -
+b00000000 .
+b00000000 /
 b00000000 0
-01
-12
-03
-14
-b0000000000000000 5
-b0000000000000000 6
-b00000000000000000000000000000000 7
-08
-b00000000000000000000000000000000 9
+b00000000 1
+b00000000 2
+b00000000 3
+b00000000 4
+b00000000 5
+b00000000 6
+b00000000 7
+b00000000 8
+b00000000 9
 b00000000 :
 b00000000 ;
 b00000000 <
-b00000000 =
-b00000000 >
-b00000000 ?
-b00000000 @
-b00000000 A
-b00000000 B
-b00000000 C
-b00000000 D
-b00000000 E
-b00000000 F
-b00000000 G
-b00000000 H
-b00000000 I
+b00000000000000000000000000100000 =
+b00000000000000000000000000000101 >
+b00000000000000000000000000001111 ?
+b0000 @
+b0000 A
+b0000 B
+b0000 C
+b0000 D
+b0000 E
+b0000 F
+b0000 G
+b0000 H
+b0000 I
 b0000 J
 b0000 K
-b00000 L
-0M
-b00000000000000000000000000010000 N
-b00000000000000000000000000001000 O
-r150 P
-b00000000000000000000000000100000 R
-b0111111111111111 S
-b1000000000000000 T
-r6.666666666666667 U
-b00000000000000000000000000000010 W
-b00000000000000000000010111011100 X
-r50 Y
-r20 [
-b00000000000000000000000000000001 ]
-b00000000000000000000000111110100 ^
-b00000000000000000000000000001010 _
-b00000000000000000000000000000100 `
-b00000000000000000000000000001100 a
-b10000 b
+b0000 L
+b0000 M
+b0000 N
+b0000 O
+b0000 P
+b0000 Q
+b0000 R
+b0000 S
+b0000 T
+b0000 U
+b0000 V
+b0000 W
+b0000 X
+b0000 Y
+b0000 Z
+b0000 [
+b0000 \
+b0000 ]
+b0000 ^
+b0000 _
+b00000000000000000000000000000011 `
+b00000000000000001111111111111111 a
+b0000000000000000 b
+b0000000000000000 c
+b0000000000000000 d
+b0000000000000000 e
+b0000000000000000 f
+b0000000000000000 g
+b0000000000000000 h
+b0000000000000000 i
 #5
-1M
-#10
-0M
-#15
-1M
-#20
-0M
-#25
-1M
-#30
-1#
-0M
-#35
-1M
-#40
-0M
-#45
-1M
-#50
-b0000001110000000 $
-b0000001001000000 %
 1&
-0M
-#55
+#10
 0&
-b0000011111100000 ,
-b0000001110000000 5
-b0000001001000000 6
-b00000000000001111110000000000000 9
-1M
-#60
-0M
-#65
-b00000000000001111110000000000000 7
-1M
-#70
-0M
-#75
-b0000011111100000 .
-1M
-#80
-0M
-#85
-1M
-#90
-0M
-#95
-1M
-#100
-0M
-#105
-1M
-#110
-0M
-#115
-1M
-#120
-0M
-#125
-1'
-b00001010 )
-b00000000000000000000000000000001 *
-b00001010 0
-02
-b00001010 :
-b0001 J
-b00001 L
-1M
-#130
-0M
-#135
-b00001011 )
-b00000000000000000000000000000010 *
-b00001011 ;
-b0010 J
-b00010 L
-1M
-#140
-0M
-#145
-b00001100 )
-b00000000000000000000000000000011 *
-b00001100 <
-b0011 J
-b00011 L
-1M
-#150
-0M
-#155
-b00001101 )
-b00000000000000000000000000000100 *
-b00001101 =
-b0100 J
-b00100 L
-1M
-#160
-0M
-#165
-b00001110 )
-b00000000000000000000000000000101 *
-04
-b00001110 >
-b0101 J
-b00101 L
-1M
-#170
-0M
-#175
-b00001111 )
-b00000000000000000000000000000110 *
-b00001111 ?
-b0110 J
-b00110 L
-1M
-#180
-0M
-#185
-b00010000 )
-b00000000000000000000000000000111 *
-b00010000 @
-b0111 J
-b00111 L
-1M
-#190
-0M
-#195
 0'
-b00010001 )
-b00000000000000000000000000001000 *
-1M
-#200
-0M
-#205
-1M
-#210
-0M
-#215
-1(
-b00001011 0
-b0001 K
-b00110 L
-1M
-#216
-b00000000000000000000000000000001 +
-#220
-0M
-#225
-b00001100 0
-b0010 K
-b00101 L
-1M
-#226
-b00000000000000000000000000000010 +
-#230
-0M
-#235
-b00001101 0
-14
-b0011 K
-b00100 L
-1M
-#236
-b00000000000000000000000000000011 +
-#240
-0M
-#245
-b00001110 0
-b0100 K
-b00011 L
-1M
-#246
-b00000000000000000000000000000100 +
-#250
-0M
-#255
-b00001111 0
-b0101 K
-b00010 L
-1M
-#256
-b00000000000000000000000000000101 +
-#260
-0M
-#265
-b00010000 0
-b0110 K
-b00001 L
-1M
-#266
-b00000000000000000000000000000110 +
-#270
-0M
-#275
-b00000000 0
-12
-b0111 K
-b00000 L
-1M
-#276
-b00000000000000000000000000000111 +
-#280
-0M
-#285
-0(
-1M
+#15
+b0001 #
+b00001 $
+b001 %
+1&
+#20
+0&
+#25
+b0010 #
+b00010 $
+b010 %
+1&
+#30
+0&
+#35
+b0011 #
+b00011 $
+b011 %
+1&
+#40
+0&
+#45
+b0100 #
+b00100 $
+b100 %
+1&
+#50
+0&
+#55
+b0101 #
+b00101 $
+b101 %
+1&
+#60
+0&
+#65
+b0110 #
+b00110 $
+b110 %
+1&
+#70
+0&
+#75
+b0111 #
+b00111 $
+b111 %
+1&
+#80
+0&
+#85
+b1000 #
+b01000 $
+b000 %
+1&
+#90
+0&
+#95
+b1001 #
+b01001 $
+b001 %
+1&
+#100
+0&
+#105
+b1010 #
+b01010 $
+b010 %
+1&
+#110
+0&
