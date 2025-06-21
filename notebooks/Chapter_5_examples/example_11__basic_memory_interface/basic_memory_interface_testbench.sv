@@ -1,33 +1,25 @@
 // basic_memory_interface_testbench.sv
 module basic_memory_interface_testbench;
   
-  // Instantiate the design under test
-  basic_memory_interface DUT();
-
+  // Instantiate design under test
+  basic_memory_interface DESIGN_INSTANCE_NAME();
+  
   initial begin
     // Dump waves
     $dumpfile("basic_memory_interface_testbench.vcd");
     $dumpvars(0, basic_memory_interface_testbench);
     
+    $display("Testbench: Starting memory interface simulation");
     $display();
-    $display("Testing Basic Memory Interface");
-    $display("==============================");
     
-    #1; // Allow time for all modules to execute their initial blocks
-    
-    $display();
-    $display("=== Interface Benefits ===");
-    $display("1. Clean signal grouping");
-    $display("2. Modports define direction and access");
-    $display("3. Reduces connection errors");
-    $display("4. Reusable interface definition");
+    // Wait for design to complete
+    #150;
     
     $display();
-    $display("=== Test Complete ===");
-    $display("Interface successfully connects controller and memory");
+    $display("Testbench: Memory interface simulation complete");
+    $display();
     
-    #1;
     $finish;
   end
-
+  
 endmodule
