@@ -5,8 +5,8 @@ module array_processor_testbench;             // Testbench module
   // Extended testbench class for additional array testing
   class array_test;
     logic [7:0] test_array[16];
-    logic [7:0] expected_sum;
-    logic [7:0] actual_sum;
+    logic [15:0] expected_sum;                // Fixed: Increased to 16-bit to prevent overflow
+    logic [15:0] actual_sum;                  // Fixed: Increased to 16-bit to prevent overflow
     integer test_size;
     
     function new();
@@ -16,23 +16,28 @@ module array_processor_testbench;             // Testbench module
     // Function to initialize test array with different pattern
     function void initialize_test_array();
       foreach (test_array[i]) begin
-        test_array[i] = 8'((i % 2 == 0) ? i * 3 : i + 10);  // Mixed pattern
+        // Fixed: Proper casting and clearer logic
+        if (i % 2 == 0) begin
+          test_array[i] = 8'(i * 3);         // Even indices: 0, 6, 12, 18, ...
+        end else begin
+          test_array[i] = 8'(i + 10);        // Odd indices: 11, 12, 13, 14, ...
+        end
       end
     endfunction
     
     // Function to calculate expected sum
     function void calculate_expected_sum();
-      expected_sum = 0;
+      expected_sum = 16'h0000;
       foreach (test_array[i]) begin
-        expected_sum += test_array[i];
+        expected_sum = expected_sum + 16'(test_array[i]);  // Fixed: Explicit cast and assignment
       end
     endfunction
     
     // Function to verify array operations
     function bit verify_sum();
-      actual_sum = 0;
+      actual_sum = 16'h0000;
       foreach (test_array[i]) begin
-        actual_sum += test_array[i];
+        actual_sum = actual_sum + 16'(test_array[i]);    // Fixed: Explicit cast and assignment
       end
       return (actual_sum == expected_sum);
     endfunction
@@ -41,7 +46,7 @@ module array_processor_testbench;             // Testbench module
     function void display_test_array();
       $display("Test Array Pattern:");
       foreach (test_array[i]) begin
-        $display("  test_array[%0d] = %0d", i, test_array[i]);
+        $display("  test_array[%0d] = %0d (0x%02h)", i, test_array[i], test_array[i]);
       end
     endfunction
     
@@ -49,7 +54,7 @@ module array_processor_testbench;             // Testbench module
     function void run_verification();
       bit sum_check;
       
-      initialize_test_array();
+      // Array is already initialized, just calculate and verify
       calculate_expected_sum();
       sum_check = verify_sum();
       
@@ -80,7 +85,8 @@ module array_processor_testbench;             // Testbench module
     $display("=== Testbench Array Verification ===");
     tb_arr_test = new();
 
-    // Display test array
+    // Initialize test array first, then display
+    tb_arr_test.initialize_test_array();
     tb_arr_test.display_test_array();
     $display();
     

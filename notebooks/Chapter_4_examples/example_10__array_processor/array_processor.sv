@@ -4,7 +4,7 @@ module array_processor ();                    // Design under test
   // Array processing class with various operations
   class array_operations;
     logic [7:0] data_array[16];
-    logic [7:0] sum;
+    logic [15:0] sum;                         // Fixed: Increased to 16-bit to prevent overflow
     logic [7:0] avg;
     logic [7:0] min_val;
     logic [7:0] max_val;
@@ -24,16 +24,16 @@ module array_processor ();                    // Design under test
     
     // Function to calculate sum of array elements
     function void calculate_sum();
-      sum = 0;
+      sum = 16'h0000;
       foreach (data_array[i]) begin
-        sum += data_array[i];
+        sum = sum + 16'(data_array[i]);  // Fixed: Explicit cast and assignment to avoid width warnings
       end
     endfunction
     
     // Function to calculate average
     function void calculate_average();
       calculate_sum();
-      avg = 8'(sum / array_size);
+      avg = 8'(sum / array_size);             // Fixed: Now uses correct sum value
     endfunction
     
     // Function to find minimum and maximum values
