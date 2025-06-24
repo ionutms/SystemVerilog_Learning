@@ -40,11 +40,15 @@ module priority_encoder_8to3 (
     // Display encoder operation
     always_comb begin
         if (valid_out) begin
-            $display("Priority Encoder: Input=%8b -> Encoded=%3b (%0d), Valid=%b", 
-                     data_in, encoded_out, encoded_out, valid_out);
+            $display(
+                "Priority Encoder: Input=%8b -> Encoded=%3b (%0d), Valid=%b", 
+                data_in, encoded_out, encoded_out, valid_out);
+            $display();
         end else begin
-            $display("Priority Encoder: Input=%8b -> No valid input (Valid=%b)", 
-                     data_in, valid_out);
+            $display(
+                "Priority Encoder: Input=%8b -> No valid input (Valid=%b)", 
+                data_in, valid_out);
+            $display();
         end
     end
 

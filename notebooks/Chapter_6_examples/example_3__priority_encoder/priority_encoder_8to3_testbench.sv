@@ -1,5 +1,5 @@
 // priority_encoder_8to3_testbench.sv
-module priority_encoder_testbench;
+module priority_encoder_8to3_testbench;
 
     // Test signals
     logic [7:0] test_data_in;
@@ -15,8 +15,8 @@ module priority_encoder_testbench;
 
     initial begin
         // Setup waveform dumping
-        $dumpfile("priority_encoder_testbench.vcd");
-        $dumpvars(0, priority_encoder_testbench);
+        $dumpfile("priority_encoder_8to3_testbench.vcd");
+        $dumpvars(0, priority_encoder_8to3_testbench);
         
         $display("=== 8-to-3 Priority Encoder Test ===");
         $display();
@@ -100,7 +100,6 @@ module priority_encoder_testbench;
 
     // Monitor for unexpected behavior
     always @(test_data_in) begin
-        #1; // Small delay to let combinational logic settle
         if (test_data_in != 8'b00000000 && !valid_result) begin
             $display("WARNING: Valid should be high when inputs are active!");
         end
