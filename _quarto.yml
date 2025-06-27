@@ -77,7 +77,7 @@ format:
     search: true
     fontsize: 13pt
   revealjs:
-    theme: [default, custom.css]
+    theme: default
     transition: slide
     slide-number: true
     scrollable: true
