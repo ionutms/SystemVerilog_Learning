@@ -76,23 +76,23 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 13pt
-  revealjs:
-    theme: default
-    transition: slide
-    slide-number: true
-    scrollable: true
-    code-copy: true
-    code-line-numbers: true
-    code-overflow: wrap
-    highlight-style: github
-    incremental: false
-    controls: true
-    progress: true
-    history: true
-    center: true
-    toc: true
-    toc-depth: 6
-    fontsize: 13pt
+  # revealjs:
+  #   theme: default
+  #   transition: slide
+  #   slide-number: true
+  #   scrollable: true
+  #   code-copy: true
+  #   code-line-numbers: true
+  #   code-overflow: wrap
+  #   highlight-style: github
+  #   incremental: false
+  #   controls: true
+  #   progress: true
+  #   history: true
+  #   center: true
+  #   toc: true
+  #   toc-depth: 6
+  #   fontsize: 13pt
 
 filters:
   - quarto
