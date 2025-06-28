@@ -77,56 +77,6 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 13pt
-  
-  # Add reveal.js presentation format
-  revealjs:
-    theme: default
-    transition: slide
-    transition-speed: fast
-    slide-number: true
-    chalkboard: true
-    multiplex: false
-    controls: true
-    navigation-mode: vertical
-    progress: true
-    hash-one-based-index: false
-    hash: true
-    history: true
-    keyboard: true
-    overview: true
-    center: true
-    touch: true
-    loop: false
-    rtl: false
-    shuffle: false
-    fragments: true
-    fragment-in-url: false
-    embedded: false
-    help: true
-    pause: true
-    show-notes: false
-    auto-slide: 0
-    auto-slide-stoppable: true
-    mouse-wheel: false
-    hide-address-bar: true
-    preview-links: false
-    view-distance: 3
-    mobile-view-distance: 2
-    # Code settings for presentations
-    code-copy: true
-    code-line-numbers: false
-    code-overflow: scroll
-    highlight-style: github
-    # Presentation-specific styling
-    width: 1280
-    height: 720
-    margin: 0.1
-    min-scale: 0.2
-    max-scale: 2.0
-    # Custom reveal.js plugins
-    revealjs-plugins:
-      - pointer
-      - menu
 
 filters:
   - quarto
