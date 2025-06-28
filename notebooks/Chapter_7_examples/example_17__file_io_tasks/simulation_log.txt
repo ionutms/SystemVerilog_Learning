@@ -1,0 +1,10 @@
+=== File I/O Test Simulation Log ===
+Time	Input	Output	Valid
+----	-----	------	-----
+55	0a	0b	1
+85	1f	20	1
+115	33	34	1
+145	7e	7f	1
+175	ff	00	1
+
+=== Test Completed Successfully ===
