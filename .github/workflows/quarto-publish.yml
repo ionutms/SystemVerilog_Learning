@@ -69,86 +69,11 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 6.5: Debug - List files to see what exists
-      - name: Debug - List notebook files
-        run: |
-          echo "Contents of notebooks directory:"
-          ls -la notebooks/ || echo "notebooks directory does not exist"
-          echo "Checking specific files mentioned in _quarto.yml:"
-          ls -la notebooks/Chapter_*.ipynb || echo "No Chapter files found"
-
-      # Step 6.6: Create necessary directories
-      - name: Create output directories
-        run: |
-          mkdir -p _site
-          mkdir -p _site/notebooks
-
       # Step 7: Render the entire website (this will respect _quarto.yml render list)
       - name: Render website
         run: |
           echo "Rendering entire website using _quarto.yml configuration"
-          # First try to render, but don't fail the entire job if some files have issues
-          quarto render || echo "Some files failed to render, but continuing..."
-          
-          # Check what was actually rendered
-          echo "Contents of _site directory after rendering:"
-          ls -la _site/ || echo "_site directory is empty or doesn't exist"
-          ls -la _site/notebooks/ || echo "_site/notebooks directory is empty or doesn't exist"
-
-      # Step 7.5: Create fallback index if rendering failed completely
-      - name: Create fallback content if needed
-        run: |
-          if [ ! -f "_site/index.html" ]; then
-            echo "No index.html found, creating fallback..."
-            mkdir -p _site
-            cat > _site/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-            <title>SystemVerilog Guide - Build in Progress</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <style>
-              body { 
-                font-family: Arial, sans-serif; 
-                max-width: 800px; 
-                margin: 0 auto; 
-                padding: 20px; 
-                background: #f5f5f5; 
-              }
-              .container { 
-                background: white; 
-                padding: 40px; 
-                border-radius: 8px; 
-                box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-              }
-              h1 { color: #333; }
-              .status { 
-                background: #fff3cd; 
-                border: 1px solid #ffeaa7; 
-                padding: 15px; 
-                border-radius: 4px; 
-                margin: 20px 0; 
-              }
-            </style>
-          </head>
-          <body>
-            <div class="container">
-              <h1>SystemVerilog Guide</h1>
-              <div class="status">
-                <strong>Build Status:</strong> The website is currently being built. 
-                Some content may be temporarily unavailable while we resolve rendering issues.
-              </div>
-              <p>This comprehensive SystemVerilog programming guide is currently under construction.</p>
-              <p>Please check back soon or visit our 
-                <a href="https://github.com/ionutms/SystemVerilog_Learning">GitHub repository</a> 
-                for the latest updates.
-              </p>
-            </div>
-          </body>
-          </html>
-          EOF
-          fi
+          quarto render
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages

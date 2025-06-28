@@ -14,7 +14,7 @@ project:
     - "notebooks/Chapter_8.ipynb"
     - "notebooks/Chapter_9.ipynb"
     - "notebooks/Chapter_10.ipynb"
-    - "notebooks/Chapter_11.ipynb"
+    # - "notebooks/Chapter_11.ipynb"
     # - "notebooks/Chapter_12.ipynb"
     # - "notebooks/Chapter_13.ipynb"
     # - "notebooks/Chapter_14.ipynb"
