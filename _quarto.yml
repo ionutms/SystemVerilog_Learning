@@ -76,23 +76,48 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 13pt
-  # revealjs:
-  #   theme: default
-  #   transition: slide
-  #   slide-number: true
-  #   scrollable: true
-  #   code-copy: true
-  #   code-line-numbers: true
-  #   code-overflow: wrap
-  #   highlight-style: github
-  #   incremental: false
-  #   controls: true
-  #   progress: true
-  #   history: true
-  #   center: true
-  #   toc: true
-  #   toc-depth: 6
-  #   fontsize: 13pt
+  revealjs:
+    # Theme options:
+    # beige, black, blood, league, moon, night,
+    # serif, simple, sky, solarized, white
+    theme: dark
+    # Slide size and layout
+    width: 1920
+    height: 1080
+    margin: 0.1
+    # Navigation and controls
+    controls: true
+    progress: true
+    history: true
+    center: true
+    hash: true
+    # Code presentation
+    code-copy: true
+    code-line-numbers: true
+    code-overflow: wrap
+    highlight-style: github
+    # Slide transitions
+    transition: slide
+    transition-speed: default
+    # Additional features
+    slide-number: true
+    preview-links: auto
+    # RevealJS plugins
+    reveal-plugins: [notes, search, zoom]
+    # Footer
+    footer: "SystemVerilog Guide - Comprehensive Programming Tutorial"
+    # Logo (optional - uncomment and adjust path if you have a logo)
+    # logo: "images/logo.png"
+    # Custom CSS for presentations
+    css: 
+      - custom.css
+      - slides.css
+    # Incremental bullet points
+    incremental: false
+    # Auto-animate between slides
+    auto-animate: true
+    # Chalkboard plugin for drawing
+    chalkboard: true
 
 filters:
   - quarto
