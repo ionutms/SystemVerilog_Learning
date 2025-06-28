@@ -5,16 +5,16 @@ project:
     - "index.qmd"
     - "notebooks/Intro.ipynb"
     - "notebooks/Chapter_1.ipynb"
-    # - "notebooks/Chapter_2.ipynb"
-    # - "notebooks/Chapter_3.ipynb"
-    # - "notebooks/Chapter_4.ipynb"
-    # - "notebooks/Chapter_5.ipynb"
-    # - "notebooks/Chapter_6.ipynb"
-    # - "notebooks/Chapter_7.ipynb"
-    # - "notebooks/Chapter_8.ipynb"
-    # - "notebooks/Chapter_9.ipynb"
-    # - "notebooks/Chapter_10.ipynb"
-    # - "notebooks/Chapter_11.ipynb"
+    - "notebooks/Chapter_2.ipynb"
+    - "notebooks/Chapter_3.ipynb"
+    - "notebooks/Chapter_4.ipynb"
+    - "notebooks/Chapter_5.ipynb"
+    - "notebooks/Chapter_6.ipynb"
+    - "notebooks/Chapter_7.ipynb"
+    - "notebooks/Chapter_8.ipynb"
+    - "notebooks/Chapter_9.ipynb"
+    - "notebooks/Chapter_10.ipynb"
+    - "notebooks/Chapter_11.ipynb"
     # - "notebooks/Chapter_12.ipynb"
     # - "notebooks/Chapter_13.ipynb"
     # - "notebooks/Chapter_14.ipynb"
@@ -54,6 +54,7 @@ format:
     highlight-style: github
     code-block-bg: "#f8f8f8"
     code-block-border-left: "#e1e4e8"
+  
   html:
     page-layout: full
     grid: 
@@ -76,6 +77,56 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 13pt
+  
+  # Add reveal.js presentation format
+  revealjs:
+    theme: [default, custom-reveal.scss]
+    transition: slide
+    transition-speed: fast
+    slide-number: true
+    chalkboard: true
+    multiplex: false
+    controls: true
+    navigation-mode: vertical
+    progress: true
+    hash-one-based-index: false
+    hash: true
+    history: true
+    keyboard: true
+    overview: true
+    center: true
+    touch: true
+    loop: false
+    rtl: false
+    shuffle: false
+    fragments: true
+    fragment-in-url: false
+    embedded: false
+    help: true
+    pause: true
+    show-notes: false
+    auto-slide: 0
+    auto-slide-stoppable: true
+    mouse-wheel: false
+    hide-address-bar: true
+    preview-links: false
+    view-distance: 3
+    mobile-view-distance: 2
+    # Code settings for presentations
+    code-copy: true
+    code-line-numbers: false
+    code-overflow: scroll
+    highlight-style: github
+    # Presentation-specific styling
+    width: 1280
+    height: 720
+    margin: 0.1
+    min-scale: 0.2
+    max-scale: 2.0
+    # Custom reveal.js plugins
+    revealjs-plugins:
+      - pointer
+      - menu
 
 filters:
   - quarto
@@ -108,6 +159,10 @@ website:
     right:
       - icon: github
         href: "https://github.com/ionutms/SystemVerilog_Learning"
+      - text: "Presentations"
+        menu:
+          - text: "Chapter 1 Slides"
+            href: notebooks/Chapter_1_slides.html
   
   sidebar:
     style: "docked"
