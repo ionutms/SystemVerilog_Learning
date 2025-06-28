@@ -80,7 +80,7 @@ format:
   
   # Add reveal.js presentation format
   revealjs:
-    theme: [default, custom-reveal.scss]
+    theme: default
     transition: slide
     transition-speed: fast
     slide-number: true
