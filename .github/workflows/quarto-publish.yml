@@ -44,14 +44,14 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.11'  # Changed from 3.13 to 3.11 for better compatibility
+          python-version: '3.13'
           cache: 'pip'  # Cache pip dependencies
 
       # Step 5: Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install jupyter nbformat nbconvert ipython
+          pip install jupyter nbformat nbconvert
           # Add any other dependencies your notebook needs
           # pip install matplotlib numpy pandas seaborn plotly
           # If you have a requirements.txt file:
@@ -69,82 +69,17 @@ jobs:
       #     install.packages(c("rmarkdown", "knitr"))
       #   shell: Rscript {0}
 
-      # Step 7: Debug - Check repository structure
-      - name: Debug repository structure
-        run: |
-          echo "=== Repository structure ==="
-          ls -la
-          echo "=== Notebooks directory ==="
-          ls -la notebooks/ || echo "notebooks directory not found"
-          echo "=== Quarto config ==="
-          head -20 _quarto.yml
-
-      # Step 8: Create missing CSS files if they don't exist
-      - name: Create missing CSS files
-        run: |
-          # Create custom.css if it doesn't exist
-          if [ ! -f "custom.css" ]; then
-            echo "/* Custom CSS for SystemVerilog Guide */" > custom.css
-            echo ".sourceCode { border-radius: 6px; }" >> custom.css
-          fi
-          
-          # Create reveal-custom.css if it doesn't exist
-          if [ ! -f "reveal-custom.css" ]; then
-            echo "/* Custom CSS for Reveal.js presentations */" > reveal-custom.css
-            echo ".reveal .sourceCode { font-size: 0.8em; }" >> reveal-custom.css
-          fi
-
-      # Step 9: Ensure _site directory exists and is clean
-      - name: Prepare output directory
-        run: |
-          rm -rf _site
-          mkdir -p _site
-          mkdir -p _site/notebooks
-
-      # Step 10: Render the website with error handling
+      # Step 7: Render the entire website (this will respect _quarto.yml render list)
       - name: Render website
         run: |
           echo "Rendering entire website using _quarto.yml configuration"
-          # Use --to html to ensure we're generating HTML
-          quarto render --to html --verbose
-          
-          # Check if the render was successful
-          if [ $? -eq 0 ]; then
-            echo "✅ Quarto render completed successfully"
-          else
-            echo "❌ Quarto render failed"
-            exit 1
-          fi
+          quarto render
 
-      # Step 11: Generate presentation slides if notebooks exist
-      - name: Generate presentation slides
-        continue-on-error: true  # Don't fail the whole build if slides fail
-        run: |
-          # Generate slides for existing notebooks
-          if [ -f "notebooks/Intro.ipynb" ]; then
-            echo "Generating Introduction slides..."
-            quarto render notebooks/Intro.ipynb --to revealjs --output notebooks/Intro_slides.html || echo "Failed to generate Intro slides"
-          fi
-          
-          if [ -f "notebooks/Chapter_1.ipynb" ]; then
-            echo "Generating Chapter 1 slides..."
-            quarto render notebooks/Chapter_1.ipynb --to revealjs --output notebooks/Chapter_1_slides.html || echo "Failed to generate Chapter 1 slides"
-          fi
-
-      # Step 12: Debug - Check output directory
-      - name: Debug output directory
-        run: |
-          echo "=== Output directory contents ==="
-          find _site -type f | head -20
-          echo "=== Checking for specific files ==="
-          ls -la _site/ || echo "_site directory issues"
-          ls -la _site/notebooks/ || echo "_site/notebooks directory issues"
-
-      # Step 13: Setup GitHub Pages (configure before upload)
+      # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Step 14: Upload artifact for GitHub Pages
+      # Step 9: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

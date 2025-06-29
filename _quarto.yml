@@ -5,16 +5,16 @@ project:
     - "index.qmd"
     - "notebooks/Intro.ipynb"
     - "notebooks/Chapter_1.ipynb"
-    # - "notebooks/Chapter_2.ipynb"
-    # - "notebooks/Chapter_3.ipynb"
-    # - "notebooks/Chapter_4.ipynb"
-    # - "notebooks/Chapter_5.ipynb"
-    # - "notebooks/Chapter_6.ipynb"
-    # - "notebooks/Chapter_7.ipynb"
-    # - "notebooks/Chapter_8.ipynb"
-    # - "notebooks/Chapter_9.ipynb"
-    # - "notebooks/Chapter_10.ipynb"
-    # - "notebooks/Chapter_11.ipynb"
+    - "notebooks/Chapter_2.ipynb"
+    - "notebooks/Chapter_3.ipynb"
+    - "notebooks/Chapter_4.ipynb"
+    - "notebooks/Chapter_5.ipynb"
+    - "notebooks/Chapter_6.ipynb"
+    - "notebooks/Chapter_7.ipynb"
+    - "notebooks/Chapter_8.ipynb"
+    - "notebooks/Chapter_9.ipynb"
+    - "notebooks/Chapter_10.ipynb"
+    - "notebooks/Chapter_11.ipynb"
     # - "notebooks/Chapter_12.ipynb"
     # - "notebooks/Chapter_13.ipynb"
     # - "notebooks/Chapter_14.ipynb"
@@ -37,6 +37,54 @@ project:
     # - "notebooks/Appendix_E.ipynb"
     # - "notebooks/Appendix_F.ipynb"
     # - "notebooks/Appendix_G.ipynb"
+
+format:
+  pdf:
+    documentclass: article
+    fontsize: 10pt
+    mainfont: "DejaVu Sans"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    geometry:
+      - top=20mm
+      - bottom=20mm
+      - left=15mm
+      - right=15mm
+    # PDF-specific code formatting
+    highlight-style: github
+    code-block-bg: "#f8f8f8"
+    code-block-border-left: "#e1e4e8"
+  
+  html:
+    page-layout: full
+    grid: 
+      body-width: 1200px
+    theme:
+      dark: darkly
+      light: cosmo
+    code-copy: true
+    code-line-numbers: true
+    code-overflow: wrap
+    code-fold: false
+    code-tools: true
+    # Syntax highlighting
+    highlight-style: github
+    # Code block styling
+    css: custom.css
+    toc: true
+    toc-depth: 6
+    toc-location: right
+    toc-title: "Contents"
+    search: true
+    fontsize: 13pt
+
+filters:
+  - quarto
+
+# Language mappings for syntax highlighting
+metadata:
+  lang: en
+  code-annotations: hover
 
 website:
   title: "SystemVerilog Guide"
@@ -63,14 +111,13 @@ website:
         href: "https://github.com/ionutms/SystemVerilog_Learning"
       - text: "Presentations"
         menu:
-          - text: "Introduction Slides"
-            href: notebooks/Intro_slides.html
           - text: "Chapter 1 Slides"
             href: notebooks/Chapter_1_slides.html
   
   sidebar:
     style: "docked"
     search: true
+
     title: "Contents"
     contents:
       - index.qmd
@@ -125,101 +172,3 @@ website:
       - notebooks/Appendix_F.ipynb
       - notebooks/Appendix_G.ipynb
       - text: "---"
-
-format:
-  html:
-    page-layout: full
-    grid: 
-      body-width: 1200px
-    theme:
-      dark: darkly
-      light: cosmo
-    code-copy: true
-    code-line-numbers: true
-    code-overflow: wrap
-    code-fold: false
-    code-tools: true
-    # Syntax highlighting
-    highlight-style: github
-    # Code block styling
-    css: custom.css
-    toc: true
-    toc-depth: 6
-    toc-location: right
-    toc-title: "Contents"
-    search: true
-    fontsize: 13pt
-
-  pdf:
-    documentclass: article
-    fontsize: 10pt
-    mainfont: "DejaVu Sans"
-    sansfont: "DejaVu Sans"
-    monofont: "DejaVu Sans Mono"
-    geometry:
-      - top=20mm
-      - bottom=20mm
-      - left=15mm
-      - right=15mm
-    # PDF-specific code formatting
-    highlight-style: github
-    code-block-bg: "#f8f8f8"
-    code-block-border-left: "#e1e4e8"
-
-  # Reveal.js presentation format
-  revealjs:
-    theme: dark
-    transition: slide
-    transition-speed: fast
-    highlight-style: github
-    code-copy: true
-    code-line-numbers: true
-    code-overflow: wrap
-    slide-number: true
-    show-slide-number: all
-    hash-type: number
-    preview-links: auto
-    chalkboard: 
-      buttons: false
-    # Control appearance
-    width: 1280
-    height: 720
-    margin: 0.1
-    # Navigation
-    controls: true
-    progress: true
-    history: true
-    center: true
-    # Code blocks
-    code-block-bg: "#2d3748"
-    code-block-border-left: "#4a5568"
-    # Custom CSS for presentations
-    css: 
-      - custom.css
-      - reveal-custom.css
-    # Logo and footer (optional)
-    logo: ""
-    footer: "SystemVerilog Guide"
-    # Enable plugins
-    multiplex: false
-    menu: true
-    # Keyboard shortcuts
-    keyboard: true
-
-filters:
-  - quarto
-
-# Language mappings for syntax highlighting
-metadata:
-  lang: en
-  code-annotations: hover
-
-# Add execution settings to handle Jupyter notebooks properly
-execute:
-  freeze: auto
-  cache: true
-  
-# Add this to help with file processing
-jupyter:
-  kernels:
-    - python3
