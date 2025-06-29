@@ -35,45 +35,43 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # Step 3: Install TinyTeX for PDF generation
-      - name: Install TinyTeX
-        run: |
-          quarto install tinytex
-
-      # Step 4: Setup Python (for Jupyter notebooks)
+      # Step 3: Setup Python (for Jupyter notebooks)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
           cache: 'pip'  # Cache pip dependencies
 
-      # Step 5: Install Python dependencies
+      # Step 4: Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install jupyter nbformat nbconvert
+          pip install jupyter nbformat nbconvert ipykernel
           # Add any other dependencies your notebook needs
           # pip install matplotlib numpy pandas seaborn plotly
           # If you have a requirements.txt file:
           # pip install -r requirements.txt
 
-      # Step 6: Setup R (if you have R content)
-      # Uncomment if you need R support
-      # - name: Set up R
-      #   uses: r-lib/actions/setup-r@v2
-      #   with:
-      #     r-version: '4.3.1'
+      # Step 5: Create output directory (fix for the rename error)
+      - name: Create output directory
+        run: |
+          mkdir -p _site
+          echo "Created _site directory"
 
-      # - name: Install R dependencies
-      #   run: |
-      #     install.packages(c("rmarkdown", "knitr"))
-      #   shell: Rscript {0}
-
-      # Step 7: Render the entire website (this will respect _quarto.yml render list)
+      # Step 6: Render the website
       - name: Render website
         run: |
-          echo "Rendering entire website using _quarto.yml configuration"
-          quarto render
+          echo "Rendering Quarto website"
+          quarto render --to html
+          echo "Render completed"
+
+      # Step 7: Verify output
+      - name: Verify output
+        run: |
+          echo "Contents of _site directory:"
+          ls -la _site/
+          echo "Verifying index.html exists:"
+          test -f _site/index.html && echo "✓ index.html found" || echo "✗ index.html not found"
 
       # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
