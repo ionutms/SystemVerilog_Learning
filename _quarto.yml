@@ -15,46 +15,10 @@ project:
     - "notebooks/Chapter_9.ipynb"
     - "notebooks/Chapter_10.ipynb"
     - "notebooks/Chapter_11.ipynb"
-    # - "notebooks/Chapter_12.ipynb"
-    # - "notebooks/Chapter_13.ipynb"
-    # - "notebooks/Chapter_14.ipynb"
-    # - "notebooks/Chapter_15.ipynb"
-    # - "notebooks/Chapter_16.ipynb"
-    # - "notebooks/Chapter_17.ipynb"
-    # - "notebooks/Chapter_18.ipynb"
-    # - "notebooks/Chapter_19.ipynb"
-    # - "notebooks/Chapter_20.ipynb"
-    # - "notebooks/Chapter_21.ipynb"
-    # - "notebooks/Chapter_22.ipynb"
-    # - "notebooks/Chapter_23.ipynb"
-    # - "notebooks/Chapter_24.ipynb"
-    # - "notebooks/Chapter_25.ipynb"
-    # - "notebooks/Chapter_26.ipynb"
-    # - "notebooks/Appendix_A.ipynb"
-    # - "notebooks/Appendix_B.ipynb"
-    # - "notebooks/Appendix_C.ipynb"
-    # - "notebooks/Appendix_D.ipynb"
-    # - "notebooks/Appendix_E.ipynb"
-    # - "notebooks/Appendix_F.ipynb"
-    # - "notebooks/Appendix_G.ipynb"
 
+# Multi-format output configuration
 format:
-  pdf:
-    documentclass: article
-    fontsize: 10pt
-    mainfont: "DejaVu Sans"
-    sansfont: "DejaVu Sans"
-    monofont: "DejaVu Sans Mono"
-    geometry:
-      - top=20mm
-      - bottom=20mm
-      - left=15mm
-      - right=15mm
-    # PDF-specific code formatting
-    highlight-style: github
-    code-block-bg: "#f8f8f8"
-    code-block-border-left: "#e1e4e8"
-  
+  # Website format (default)
   html:
     page-layout: full
     grid: 
@@ -67,9 +31,7 @@ format:
     code-overflow: wrap
     code-fold: false
     code-tools: true
-    # Syntax highlighting
     highlight-style: github
-    # Code block styling
     css: custom.css
     toc: true
     toc-depth: 6
@@ -77,6 +39,83 @@ format:
     toc-title: "Contents"
     search: true
     fontsize: 13pt
+  
+  # RevealJS slides format
+  revealjs:
+    theme: [default, custom-reveal.scss]  # You can create a custom theme
+    transition: slide
+    background-transition: fade
+    smaller: true
+    scrollable: true
+    incremental: false
+    slide-number: true
+    show-slide-number: all
+    hash-type: number
+    preview-links: auto
+    chalkboard: true
+    multiplex: false
+    controls: true
+    progress: true
+    history: true
+    center: true
+    touch: true
+    loop: false
+    rtl: false
+    shuffle: false
+    fragments: true
+    embedded: false
+    help: true
+    pause: true
+    show-notes: false
+    auto-slide: 0
+    auto-slide-stoppable: true
+    mouse-wheel: false
+    hide-address-bar: true
+    preload-iframes: false
+    pdf-max-pages-per-slide: 1
+    pdf-separate-fragments: true
+    # Code highlighting for slides
+    highlight-style: github
+    code-line-numbers: false
+    code-copy: false
+    code-fold: false
+    # Slide-specific styling
+    fig-width: 8
+    fig-height: 6
+    fig-format: svg
+    fig-dpi: 300
+  
+  # PDF format
+  pdf:
+    documentclass: book  # Changed from article for better chapter handling
+    fontsize: 11pt
+    mainfont: "DejaVu Sans"
+    sansfont: "DejaVu Sans"
+    monofont: "DejaVu Sans Mono"
+    geometry:
+      - top=25mm
+      - bottom=25mm
+      - left=20mm
+      - right=20mm
+    # PDF-specific settings
+    highlight-style: github
+    code-block-bg: "#f8f8f8"
+    code-block-border-left: "#e1e4e8"
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    colorlinks: true
+    lot: false  # List of tables
+    lof: false  # List of figures
+    # Page layout
+    include-in-header: 
+      - text: |
+          \usepackage{fancyhdr}
+          \pagestyle{fancy}
+          \fancyhf{}
+          \fancyhead[LE,RO]{\thepage}
+          \fancyhead[LO,RE]{\leftmark}
+    keep-tex: true  # Keep LaTeX source for debugging
 
 filters:
   - quarto
@@ -91,14 +130,9 @@ website:
   description: "Comprehensive SystemVerilog Programming Guide"
   site-url: "https://ionutms.github.io/SystemVerilog_Learning"
   repo-url: "https://github.com/ionutms/SystemVerilog_Learning"
-  
-  # Fixed: Add proper base path for GitHub Pages project site
   site-path: "/SystemVerilog_Learning/"
-  
-  # Fixed: Add page navigation and homepage settings
   page-navigation: true
   
-  # Add navbar
   navbar:
     title: "SystemVerilog Guide"
     left:
@@ -106,11 +140,17 @@ website:
         href: index.qmd
       - text: "Introduction" 
         href: notebooks/Intro.ipynb
+    right:
+      - icon: github
+        href: https://github.com/ionutms/SystemVerilog_Learning
+      - text: "PDF"
+        href: "SystemVerilog-Guide.pdf"  # Link to generated PDF
+      - text: "Slides"
+        href: "slides/"  # Directory with slide presentations
   
   sidebar:
     style: "docked"
     search: true
-
     title: "Contents"
     contents:
       - index.qmd
@@ -132,36 +172,3 @@ website:
       - notebooks/Chapter_9.ipynb
       - notebooks/Chapter_10.ipynb
       - notebooks/Chapter_11.ipynb
-      - text: "---"
-      - text: "Part IV: Verification Features"
-      - notebooks/Chapter_12.ipynb
-      - notebooks/Chapter_13.ipynb
-      - notebooks/Chapter_14.ipynb
-      - notebooks/Chapter_15.ipynb
-      - text: "---"
-      - text: "Part V: Advanced Verification"
-      - notebooks/Chapter_16.ipynb
-      - notebooks/Chapter_17.ipynb
-      - notebooks/Chapter_18.ipynb
-      - notebooks/Chapter_19.ipynb
-      - text: "---"
-      - text: "Part VI: Practical Applications"
-      - notebooks/Chapter_20.ipynb
-      - notebooks/Chapter_21.ipynb
-      - notebooks/Chapter_22.ipynb
-      - notebooks/Chapter_23.ipynb
-      - text: "---"
-      - text: "Part VII: Advanced Topics"
-      - notebooks/Chapter_24.ipynb
-      - notebooks/Chapter_25.ipynb
-      - notebooks/Chapter_26.ipynb
-      - text: "---"
-      - text: "Appendices"
-      - notebooks/Appendix_A.ipynb
-      - notebooks/Appendix_B.ipynb
-      - notebooks/Appendix_C.ipynb
-      - notebooks/Appendix_D.ipynb
-      - notebooks/Appendix_E.ipynb
-      - notebooks/Appendix_F.ipynb
-      - notebooks/Appendix_G.ipynb
-      - text: "---"
