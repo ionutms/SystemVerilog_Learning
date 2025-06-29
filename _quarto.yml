@@ -4,7 +4,8 @@ project:
   render:
     # Only render files that exist
     - "index.qmd"
-    - "notebooks/Intro.ipynb"
+    - "notebooks/Chapter_0.ipynb"
+    # - "notebooks/Intro.ipynb"
 
 website:
   title: "SystemVerilog Guide"
