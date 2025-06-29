@@ -2,8 +2,8 @@ project:
   type: website
   output-dir: _site
   render:
-    - "index.qmd"
-    - "notebooks/Intro.ipynb"
+    # - "index.qmd"
+    # - "notebooks/Intro.ipynb"
     - "notebooks/Chapter_1.ipynb"
     # - "notebooks/Chapter_2.ipynb"
     # - "notebooks/Chapter_3.ipynb"
