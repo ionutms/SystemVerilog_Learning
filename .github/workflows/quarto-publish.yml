@@ -35,14 +35,19 @@ jobs:
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
 
-      # Step 3: Setup Python (for Jupyter notebooks)
+      # Step 3: Install TinyTeX for PDF generation
+      - name: Install TinyTeX
+        run: |
+          quarto install tinytex
+
+      # Step 4: Setup Python (for Jupyter notebooks)
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.13'
           cache: 'pip'  # Cache pip dependencies
 
-      # Step 4: Install Python dependencies
+      # Step 5: Install Python dependencies
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
@@ -58,11 +63,11 @@ jobs:
           mkdir -p _site
           echo "Created _site directory"
 
-      # Step 6: Render the website
+      # Step 6: Render the website (all formats)
       - name: Render website
         run: |
-          echo "Rendering Quarto website"
-          quarto render --to html
+          echo "Rendering Quarto website with all formats"
+          quarto render
           echo "Render completed"
 
       # Step 7: Verify output
