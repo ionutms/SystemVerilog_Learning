@@ -57,140 +57,32 @@ jobs:
           # If you have a requirements.txt file:
           # pip install -r requirements.txt
 
-      # Step 6: Create output directories for multi-format build
-      - name: Create output directories
+      # Step 5: Create output directory (fix for the rename error)
+      - name: Create output directory
         run: |
           mkdir -p _site
-          mkdir -p _site/slides
-          mkdir -p _site/pdf
-          echo "Created output directories"
+          echo "Created _site directory"
 
-      # Step 7: Render the website (HTML format first)
-      - name: Render website (HTML)
+      # Step 6: Render the website (all formats)
+      - name: Render website
         run: |
-          echo "Rendering Quarto website (HTML format)"
-          quarto render --to html
-          echo "HTML render completed"
+          echo "Rendering Quarto website with all formats"
+          quarto render
+          echo "Render completed"
 
-      # Step 8: Render individual notebooks as slides
-      - name: Render slides
-        run: |
-          echo "Rendering individual notebooks as RevealJS slides"
-          # Create slides directory if it doesn't exist
-          mkdir -p _site/slides
-          
-          # Render each notebook as slides
-          for notebook in notebooks/*.ipynb; do
-            if [ -f "$notebook" ]; then
-              filename=$(basename "$notebook" .ipynb)
-              echo "Building slides for $filename..."
-              quarto render "$notebook" --to revealjs --output-dir _site/slides
-            fi
-          done
-          echo "Slides render completed"
-
-      # Step 9: Render combined PDF
-      - name: Render PDF
-        run: |
-          echo "Rendering combined PDF"
-          # Try to render a combined PDF of all content
-          quarto render --to pdf --output SystemVerilog-Guide.pdf
-          # Move PDF to site directory
-          if [ -f "SystemVerilog-Guide.pdf" ]; then
-            mv SystemVerilog-Guide.pdf _site/
-            echo "✓ Combined PDF created successfully"
-          else
-            echo "⚠ Combined PDF creation failed, trying individual chapters"
-            # Fallback: render individual chapter PDFs
-            mkdir -p _site/pdf
-            for notebook in notebooks/*.ipynb; do
-              if [ -f "$notebook" ]; then
-                filename=$(basename "$notebook" .ipynb)
-                echo "Building PDF for $filename..."
-                quarto render "$notebook" --to pdf --output-dir _site/pdf
-              fi
-            done
-          fi
-          echo "PDF render completed"
-
-      # Step 10: Create download links page
-      - name: Create downloads page
-        run: |
-          cat > _site/downloads.html << 'EOF'
-          <!DOCTYPE html>
-          <html>
-          <head>
-              <title>SystemVerilog Guide - Downloads</title>
-              <meta charset="utf-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1">
-              <style>
-                  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 2rem; }
-                  .container { max-width: 800px; margin: 0 auto; }
-                  .section { margin: 2rem 0; padding: 1rem; border: 1px solid #ddd; border-radius: 8px; }
-                  .download-list { list-style: none; padding: 0; }
-                  .download-list li { margin: 0.5rem 0; }
-                  .download-list a { text-decoration: none; color: #0066cc; }
-                  .download-list a:hover { text-decoration: underline; }
-              </style>
-          </head>
-          <body>
-              <div class="container">
-                  <h1>SystemVerilog Guide - Downloads</h1>
-                  
-                  <div class="section">
-                      <h2>📄 PDF Version</h2>
-                      <ul class="download-list">
-                          <li><a href="SystemVerilog-Guide.pdf">📥 Complete Guide (PDF)</a></li>
-                      </ul>
-                  </div>
-                  
-                  <div class="section">
-                      <h2>🎯 Presentation Slides</h2>
-                      <ul class="download-list">
-                          <li><a href="slides/">📂 All Slides Directory</a></li>
-                      </ul>
-                  </div>
-                  
-                  <div class="section">
-                      <h2>🌐 Online Version</h2>
-                      <ul class="download-list">
-                          <li><a href="index.html">📖 Read Online</a></li>
-                      </ul>
-                  </div>
-                  
-                  <div class="section">
-                      <h2>📚 Source Code</h2>
-                      <ul class="download-list">
-                          <li><a href="https://github.com/ionutms/SystemVerilog_Learning">🔗 GitHub Repository</a></li>
-                      </ul>
-                  </div>
-              </div>
-          </body>
-          </html>
-          EOF
-          echo "Downloads page created"
-
-      # Step 11: Verify output
+      # Step 7: Verify output
       - name: Verify output
         run: |
           echo "Contents of _site directory:"
           ls -la _site/
-          echo ""
-          echo "Verifying main files:"
+          echo "Verifying index.html exists:"
           test -f _site/index.html && echo "✓ index.html found" || echo "✗ index.html not found"
-          test -f _site/SystemVerilog-Guide.pdf && echo "✓ PDF found" || echo "⚠ PDF not found"
-          test -d _site/slides && echo "✓ slides directory found" || echo "⚠ slides directory not found"
-          echo ""
-          echo "Slides directory contents:"
-          ls -la _site/slides/ 2>/dev/null || echo "No slides directory"
-          echo ""
-          echo "Build summary complete"
 
-      # Step 12: Setup GitHub Pages (configure before upload)
+      # Step 8: Setup GitHub Pages (configure before upload)
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      # Step 13: Upload artifact for GitHub Pages
+      # Step 9: Upload artifact for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
