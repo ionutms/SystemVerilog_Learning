@@ -106,13 +106,6 @@ website:
         href: index.qmd
       - text: "Introduction" 
         href: notebooks/Intro.ipynb
-    right:
-      - icon: github
-        href: "https://github.com/ionutms/SystemVerilog_Learning"
-      - text: "Presentations"
-        menu:
-          - text: "Chapter 1 Slides"
-            href: notebooks/Chapter_1_slides.html
   
   sidebar:
     style: "docked"
