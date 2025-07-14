@@ -76,32 +76,116 @@ format:
           % Import titlesec package for advanced header formatting
           \usepackage{titlesec}
           
-          % Format subsection headers (## in Markdown)
-          % Syntax: \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
-          \titleformat{\subsection}
-            {\normalfont\large\bfseries}  % Font style: normal weight, large size, bold
-            {\thesubsection}              % Section number format
-            {1em}                         % Space between number and title
-            {}                            % Code before title (empty)
+          % Format all header levels consistently
+          % Level 1: section (# in Markdown)
+          \titleformat{\section}
+            {\normalfont\Large\bfseries}      % Font: normal, Large, bold
+            {\thesection}                     % Section number
+            {1em}                             % Space between number and title
+            {}                                % Before-code (empty)
           
-          % Control spacing around subsection headers
+          % Level 2: subsection (## in Markdown)
+          \titleformat{\subsection}
+            {\normalfont\large\bfseries}      % Font: normal, large, bold
+            {\thesubsection}                  % Section number format
+            {1em}                             % Space between number and title
+            {}                                % Before-code (empty)
+          
+          % Level 3: subsubsection (### in Markdown)
+          \titleformat{\subsubsection}
+            {\normalfont\normalsize\bfseries} % Font: normal, normal size, bold
+            {\thesubsubsection}               % Section number format
+            {1em}                             % Space between number and title
+            {}                                % Before-code (empty)
+          
+          % Level 4: paragraph (#### in Markdown)
+          \titleformat{\paragraph}
+            {\normalfont\normalsize\bfseries} % Font: normal, normal size, bold
+            {\theparagraph}                   % Section number format
+            {1em}                             % Space between number and title
+            {}                                % Before-code (empty)
+          
+          % Level 5: subparagraph (##### in Markdown)
+          \titleformat{\subparagraph}
+            {\normalfont\small\bfseries}      % Font: normal, small, bold
+            {\thesubparagraph}                % Section number format
+            {1em}                             % Space between number and title
+            {}                                % Before-code (empty)
+          
+          % Control spacing around all header levels
           % Syntax: \titlespacing*{command}{left}{before-sep}{after-sep}[right-sep]
+          
+          % Level 1: section spacing
+          \titlespacing*{\section}
+            {0pt}                         % Left indent
+            {3.5ex plus 1ex minus .2ex}   % Space before header (more than subsection)
+            {2.3ex plus .2ex}             % Space after header
+          
+          % Level 2: subsection spacing
           \titlespacing*{\subsection}
             {0pt}                         % Left indent
-            {3.25ex plus 1ex minus .2ex}  % Space before header (flexible)
-            {1.5ex plus .2ex}             % Space after header (flexible)
+            {3.25ex plus 1ex minus .2ex}  % Space before header
+            {1.5ex plus .2ex}             % Space after header
+          
+          % Level 3: subsubsection spacing
+          \titlespacing*{\subsubsection}
+            {0pt}                         % Left indent
+            {3.25ex plus 1ex minus .2ex}  % Space before header
+            {1.5ex plus .2ex}             % Space after header
+          
+          % Level 4: paragraph spacing
+          \titlespacing*{\paragraph}
+            {0pt}                         % Left indent
+            {3.25ex plus 1ex minus .2ex}  % Space before header
+            {1em}                         % Space after header (smaller)
+          
+          % Level 5: subparagraph spacing
+          \titlespacing*{\subparagraph}
+            {0pt}                         % Left indent
+            {3.25ex plus 1ex minus .2ex}  % Space before header
+            {1em}                         % Space after header (smaller)
           
           % === MAIN SOLUTION: Prevent orphaned headers ===
           % Import needspace package - ensures minimum space before placing content
           \usepackage{needspace}
           
-          % Save original subsection command
-          \let\oldsubsection\subsection
+          % === APPLY PAGE BREAK CONTROL TO ALL HEADER LEVELS ===
           
-          % Redefine subsection to require minimum space
-          % \needspace{4\baselineskip} = require at least 4 lines of space
-          % If less than 4 lines available, force page break before header
+          % Level 1 Headers: # in Markdown (section in LaTeX)
+          % Save original section command and redefine with needspace
+          \let\oldsection\section
+          \renewcommand{\section}[1]{\needspace{5\baselineskip}\oldsection{#1}}
+          
+          % Level 2 Headers: ## in Markdown (subsection in LaTeX)
+          % Save original subsection command and redefine with needspace
+          \let\oldsubsection\subsection
           \renewcommand{\subsection}[1]{\needspace{4\baselineskip}\oldsubsection{#1}}
+          
+          % Level 3 Headers: ### in Markdown (subsubsection in LaTeX)
+          % Save original subsubsection command and redefine with needspace
+          \let\oldsubsubsection\subsubsection
+          \renewcommand{\subsubsection}[1]{\needspace{3\baselineskip}\oldsubsubsection{#1}}
+          
+          % Level 4 Headers: #### in Markdown (paragraph in LaTeX)
+          % Save original paragraph command and redefine with needspace
+          \let\oldparagraph\paragraph
+          \renewcommand{\paragraph}[1]{\needspace{3\baselineskip}\oldparagraph{#1}}
+          
+          % Level 5 Headers: ##### in Markdown (subparagraph in LaTeX)
+          % Save original subparagraph command and redefine with needspace
+          \let\oldsubparagraph\subparagraph
+          \renewcommand{\subparagraph}[1]{\needspace{2\baselineskip}\oldsubparagraph{#1}}
+          
+          % EXPLANATION OF NEEDSPACE VALUES:
+          % - Level 1 (5 lines): Most important, needs most space
+          % - Level 2 (4 lines): Important section headers
+          % - Level 3 (3 lines): Subsection headers
+          % - Level 4 (3 lines): Smaller headers but still need space
+          % - Level 5 (2 lines): Minimal space requirement
+          % 
+          % You can adjust these values based on your preferences:
+          % - Increase for more aggressive page breaking
+          % - Decrease for more compact layout
           
           % === ALTERNATIVE APPROACH (commented out) ===
           % Different method using titlesec's built-in page break controls
@@ -123,8 +207,19 @@ format:
           
           % \pagebreak[n] where n = 0-4 (0=no preference, 4=strong preference)
           % [3] = encourage page break before section if needed
-          \sectionfont{\pagebreak[3]}      % For main sections (# in Markdown)
-          \subsectionfont{\pagebreak[3]}   % For subsections (## in Markdown)
+          % Apply to all header levels for consistent behavior
+          \sectionfont{\pagebreak[3]}         % For level 1 headers (# in Markdown)
+          \subsectionfont{\pagebreak[3]}      % For level 2 headers (## in Markdown)
+          \subsubsectionfont{\pagebreak[2]}   % For level 3 headers (### in Markdown)
+          \paragraphfont{\pagebreak[2]}       % For level 4 headers (#### in Markdown)
+          \subparagraphfont{\pagebreak[1]}    % For level 5 headers (##### in Markdown)
+          
+          % EXPLANATION OF PAGEBREAK VALUES:
+          % [3] = Strong preference for page break (levels 1-2)
+          % [2] = Moderate preference for page break (levels 3-4)
+          % [1] = Weak preference for page break (level 5)
+          % This creates a hierarchy where more important headers
+          % are more likely to start on a new page
           
           % === EXPLANATION OF UNITS ===
           % \baselineskip = height of one line of text
