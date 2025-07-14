@@ -1,10 +1,15 @@
+# === QUARTO PROJECT CONFIGURATION ===
 project:
-  type: website
-  output-dir: _site
+  type: website              # Project type: website, book, or manuscript
+  output-dir: _site         # Directory where rendered files will be placed
+  
+  # === RENDER CONFIGURATION ===
+  # List of files to render (in order)
+  # Currently rendering chapters 1-11, with 12+ commented out for development
   render:
-    - "index.qmd"
-    - "notebooks/Intro.ipynb"
-    - "notebooks/Chapter_1.ipynb"
+    - "index.qmd"                    # Homepage
+    - "notebooks/Intro.ipynb"        # Introduction notebook
+    - "notebooks/Chapter_1.ipynb"    # Active chapters
     - "notebooks/Chapter_2.ipynb"
     - "notebooks/Chapter_3.ipynb"
     - "notebooks/Chapter_4.ipynb"
@@ -15,6 +20,7 @@ project:
     - "notebooks/Chapter_9.ipynb"
     - "notebooks/Chapter_10.ipynb"
     - "notebooks/Chapter_11.ipynb"
+    # Commented out chapters (uncomment when ready to include)
     # - "notebooks/Chapter_12.ipynb"
     # - "notebooks/Chapter_13.ipynb"
     # - "notebooks/Chapter_14.ipynb"
@@ -40,122 +46,233 @@ project:
 
 format:
   pdf:
+    # LaTeX document class - 'article' is good for academic/technical documents
     documentclass: article
+    
+    # Font size for the entire document (8pt, 9pt, 10pt, 11pt, 12pt)
     fontsize: 10pt
-    mainfont: "DejaVu Sans"
-    sansfont: "DejaVu Sans"
-    monofont: "DejaVu Sans Mono"
+    
+    # Font families for different text types
+    mainfont: "DejaVu Sans"      # Main body text font
+    sansfont: "DejaVu Sans"      # Sans-serif font (used for headings by default)
+    monofont: "DejaVu Sans Mono" # Monospace font (used for code blocks)
+    
+    # Page margins configuration
     geometry:
-      - top=20mm
-      - bottom=20mm
-      - left=15mm
-      - right=15mm
-    # PDF-specific code formatting
-    highlight-style: github
-    code-block-bg: "#f8f8f8"
-    code-block-border-left: "#e1e4e8"
+      - top=20mm     # Top margin
+      - bottom=20mm  # Bottom margin
+      - left=15mm    # Left margin
+      - right=15mm   # Right margin
+    
+    # Syntax highlighting and code block styling for PDF
+    highlight-style: github                    # Code syntax highlighting theme
+    code-block-bg: "#f8f8f8"                 # Background color for code blocks
+    code-block-border-left: "#e1e4e8"        # Left border color for code blocks
+    
+    # ===== PAGE BREAK CONTROLS FOR HEADERS =====
+    # This section adds LaTeX commands to control how headers behave near page breaks
+    include-in-header:
+      - text: |
+          % Import titlesec package for advanced header formatting
+          \usepackage{titlesec}
+          
+          % Format subsection headers (## in Markdown)
+          % Syntax: \titleformat{command}[shape]{format}{label}{sep}{before-code}[after-code]
+          \titleformat{\subsection}
+            {\normalfont\large\bfseries}  % Font style: normal weight, large size, bold
+            {\thesubsection}              % Section number format
+            {1em}                         % Space between number and title
+            {}                            % Code before title (empty)
+          
+          % Control spacing around subsection headers
+          % Syntax: \titlespacing*{command}{left}{before-sep}{after-sep}[right-sep]
+          \titlespacing*{\subsection}
+            {0pt}                         % Left indent
+            {3.25ex plus 1ex minus .2ex}  % Space before header (flexible)
+            {1.5ex plus .2ex}             % Space after header (flexible)
+          
+          % === MAIN SOLUTION: Prevent orphaned headers ===
+          % Import needspace package - ensures minimum space before placing content
+          \usepackage{needspace}
+          
+          % Save original subsection command
+          \let\oldsubsection\subsection
+          
+          % Redefine subsection to require minimum space
+          % \needspace{4\baselineskip} = require at least 4 lines of space
+          % If less than 4 lines available, force page break before header
+          \renewcommand{\subsection}[1]{\needspace{4\baselineskip}\oldsubsection{#1}}
+          
+          % === ALTERNATIVE APPROACH (commented out) ===
+          % Different method using titlesec's built-in page break controls
+          % \titleformat{\subsection}[hang]
+          %   {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+          %   [\titlerule]  % Adds horizontal rule after header
+          % \titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+          
+          % === PREVENT WIDOWS AND ORPHANS ===
+          % Widow = single line at top of page from previous paragraph
+          % Orphan = single line at bottom of page from next paragraph
+          % 10000 = very high penalty (almost never allow)
+          \widowpenalty=10000   % Prevent widows
+          \clubpenalty=10000    % Prevent orphans
+          
+          % === ADDITIONAL PAGE BREAK CONTROLS ===
+          % Import sectsty package for section styling
+          \usepackage{sectsty}
+          
+          % \pagebreak[n] where n = 0-4 (0=no preference, 4=strong preference)
+          % [3] = encourage page break before section if needed
+          \sectionfont{\pagebreak[3]}      % For main sections (# in Markdown)
+          \subsectionfont{\pagebreak[3]}   % For subsections (## in Markdown)
+          
+          % === EXPLANATION OF UNITS ===
+          % \baselineskip = height of one line of text
+          % ex = height of letter 'x' in current font
+          % em = width of letter 'M' in current font
+          % pt = point (1/72 inch)
+          % mm = millimeter
   
   html:
+    # === HTML OUTPUT CONFIGURATION ===
+    # Full page layout without sidebar constraints
     page-layout: full
+    
+    # Grid system configuration
     grid: 
-      body-width: 1200px
+      body-width: 1200px  # Maximum width for content area
+    
+    # Theme configuration for light/dark mode
     theme:
-      dark: darkly
-      light: cosmo
-    code-copy: true
-    code-line-numbers: true
-    code-overflow: wrap
-    code-fold: false
-    code-tools: true
-    # Syntax highlighting
+      dark: darkly   # Dark theme name (Bootstrap-based)
+      light: cosmo   # Light theme name (Bootstrap-based)
+    
+    # === CODE BLOCK FEATURES ===
+    code-copy: true           # Add copy button to code blocks
+    code-line-numbers: true   # Show line numbers in code blocks
+    code-overflow: wrap       # Wrap long lines instead of horizontal scroll
+    code-fold: false          # Don't collapse code blocks by default
+    code-tools: true          # Show code tools (view source, etc.)
+    
+    # Syntax highlighting theme (same as PDF for consistency)
     highlight-style: github
-    # Code block styling
+    
+    # Custom CSS file for additional styling
     css: custom.css
-    toc: true
-    toc-depth: 6
-    toc-location: right
-    toc-title: "Contents"
-    search: true
-    fontsize: 13pt
+    
+    # === TABLE OF CONTENTS (TOC) CONFIGURATION ===
+    toc: true                 # Enable table of contents
+    toc-depth: 6             # Include headings up to level 6 (######)
+    toc-location: right      # Position TOC on right side
+    toc-title: "Contents"    # Title for TOC section
+    
+    # === ADDITIONAL HTML FEATURES ===
+    search: true             # Enable search functionality
+    fontsize: 13pt          # Base font size for HTML output
 
+# === QUARTO FILTERS AND PROCESSING ===
 filters:
-  - quarto
+  - quarto  # Default Quarto filter for processing
 
-# Language mappings for syntax highlighting
+# === DOCUMENT METADATA ===
+# Global metadata applied to all documents
 metadata:
-  lang: en
-  code-annotations: hover
+  lang: en                    # Document language (affects hyphenation, etc.)
+  code-annotations: hover     # How code annotations are displayed
 
+# === WEBSITE CONFIGURATION ===
 website:
+  # === SITE IDENTITY ===
   title: "SystemVerilog Guide"
   description: "Comprehensive SystemVerilog Programming Guide"
+  
+  # === DEPLOYMENT CONFIGURATION ===
+  # URLs for the live site and source repository
   site-url: "https://ionutms.github.io/SystemVerilog_Learning"
   repo-url: "https://github.com/ionutms/SystemVerilog_Learning"
   
-  # Fixed: Add proper base path for GitHub Pages project site
+  # GitHub Pages project sites need a base path (not root domain)
+  # This ensures all links work correctly when deployed
   site-path: "/SystemVerilog_Learning/"
   
-  # Fixed: Add page navigation and homepage settings
-  page-navigation: true
+  # === NAVIGATION FEATURES ===
+  page-navigation: true  # Enable prev/next page navigation
   
-  # Add navbar
+  # === TOP NAVIGATION BAR ===
   navbar:
-    title: "SystemVerilog Guide"
-    left:
+    title: "SystemVerilog Guide"  # Brand name in navbar
+    left:  # Left-aligned navigation items
       - text: "Home"
         href: index.qmd
       - text: "Introduction" 
         href: notebooks/Intro.ipynb
   
+  # === SIDEBAR CONFIGURATION ===
   sidebar:
-    style: "docked"
-    search: true
-
-    title: "Contents"
+    style: "docked"      # Sidebar style: docked, floating, or push
+    search: true         # Enable search within sidebar
+    title: "Contents"    # Sidebar title
+    
+    # === SIDEBAR CONTENT STRUCTURE ===
+    # Defines the hierarchical structure of the site
     contents:
-      - index.qmd
-      - notebooks/Intro.ipynb
-      - text: "---"
+      - index.qmd                    # Homepage
+      - notebooks/Intro.ipynb        # Introduction
+      - text: "---"                  # Horizontal separator
+      
+      # === PART I: FUNDAMENTALS ===
       - text: "Part I: Fundamentals"
       - notebooks/Chapter_1.ipynb
       - notebooks/Chapter_2.ipynb
       - notebooks/Chapter_3.ipynb
       - notebooks/Chapter_4.ipynb
       - text: "---"
+      
+      # === PART II: DESIGN CONSTRUCTS ===
       - text: "Part II: Design Constructs"
       - notebooks/Chapter_5.ipynb
       - notebooks/Chapter_6.ipynb
       - notebooks/Chapter_7.ipynb
       - notebooks/Chapter_8.ipynb
       - text: "---"
+      
+      # === PART III: OBJECT-ORIENTED PROGRAMMING ===
       - text: "Part III: Object-Oriented Programming"
       - notebooks/Chapter_9.ipynb
       - notebooks/Chapter_10.ipynb
       - notebooks/Chapter_11.ipynb
       - text: "---"
+      
+      # === FUTURE PARTS (currently commented out in render) ===
+      # These will be activated when corresponding chapters are uncommented
       - text: "Part IV: Verification Features"
       - notebooks/Chapter_12.ipynb
       - notebooks/Chapter_13.ipynb
       - notebooks/Chapter_14.ipynb
       - notebooks/Chapter_15.ipynb
       - text: "---"
+      
       - text: "Part V: Advanced Verification"
       - notebooks/Chapter_16.ipynb
       - notebooks/Chapter_17.ipynb
       - notebooks/Chapter_18.ipynb
       - notebooks/Chapter_19.ipynb
       - text: "---"
+      
       - text: "Part VI: Practical Applications"
       - notebooks/Chapter_20.ipynb
       - notebooks/Chapter_21.ipynb
       - notebooks/Chapter_22.ipynb
       - notebooks/Chapter_23.ipynb
       - text: "---"
+      
       - text: "Part VII: Advanced Topics"
       - notebooks/Chapter_24.ipynb
       - notebooks/Chapter_25.ipynb
       - notebooks/Chapter_26.ipynb
       - text: "---"
+      
+      # === APPENDICES ===
       - text: "Appendices"
       - notebooks/Appendix_A.ipynb
       - notebooks/Appendix_B.ipynb
