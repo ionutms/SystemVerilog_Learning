@@ -12,6 +12,7 @@ project:
     - "notebooks/Chapter_1.ipynb"    # Active chapters
     - "notebooks/Chapter_2.ipynb"
     - "notebooks/Chapter_3.ipynb"
+    - "notebooks/Chapter_4.ipynb"
     - "notebooks/Chapter__4_0.ipynb"
     - "notebooks/Chapter__4_1.ipynb"
     - "notebooks/Chapter__4_2.ipynb"
@@ -325,7 +326,13 @@ website:
       - notebooks/Chapter_1.ipynb
       - notebooks/Chapter_2.ipynb
       - notebooks/Chapter_3.ipynb
-      - notebooks/Chapter_4.ipynb
+      # - notebooks/Chapter_4.ipynb
+      - "notebooks/Chapter__4_0.ipynb"
+      - "notebooks/Chapter__4_1.ipynb"
+      - "notebooks/Chapter__4_2.ipynb"
+      - "notebooks/Chapter__4_3.ipynb"
+      - "notebooks/Chapter__4_4.ipynb"
+      - "notebooks/Chapter__4_5.ipynb"
       - text: "---"
       
       # === PART II: DESIGN CONSTRUCTS ===
